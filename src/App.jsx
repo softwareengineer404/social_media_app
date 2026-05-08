@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react'  //This brings the React library into your file.
 
 const App = () => {
   return (
@@ -6,4 +6,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App    //Makes this component available for other files to use. main.jsx or other files can import and display it.
