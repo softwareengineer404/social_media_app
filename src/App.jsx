@@ -1,11 +1,13 @@
 import React from 'react'  //This brings the React library into your file.
 import { Route, Routes } from 'react-router-dom'
 import Login from './pages/Login'
+import Feed from './pages/Feed'
 const App = () => {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Login}>
+        <Route path='/' element={<Login />}>
+          <Route index element={<Feed/>}/>
 
         </Route>
       </Routes>
