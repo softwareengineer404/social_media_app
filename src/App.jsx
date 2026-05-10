@@ -1,8 +1,16 @@
 import React from 'react'  //This brings the React library into your file.
-
+import { Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <Routes>
+        <Route path='/' element={<Login}>
+
+        </Route>
+      </Routes>
+      App
+    </>
   )
 }
 
