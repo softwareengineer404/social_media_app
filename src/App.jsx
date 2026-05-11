@@ -7,6 +7,7 @@ import ChatBox from './pages/ChatBox'
 import Connections from './pages/Connections'
 import Discover from './pages/discover'
 import Profile from './pages/Profile'
+// import CreatePost from './pages/CreatePost'
 const App = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const App = () => {
           <Route path='discover' element={<Discover/>}/>
           <Route path='profile' element={<Profile/>}/>
           <Route path='profile/:profileId' element={<Profile/>}/>
+          <Route path='create-post' element={<CreatePost/>}/>
 
         </Route>
       </Routes>
