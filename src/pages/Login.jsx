@@ -11,7 +11,11 @@ const Login = () => {
       <div className='flex-1 flex flex-col items-start justify-between p-6 md:p-10
       lg:pl-40'>
         <img src={assets.logo} alt="" className='h-12 object-contain'/>
-        
+        <div>
+          <div>
+            <img src={assets.group_users} alt="" className='h-8 md:h-10'/>
+          </div>
+        </div>
       </div>
 
       
