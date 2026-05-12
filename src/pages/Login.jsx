@@ -28,7 +28,10 @@ const Login = () => {
           <p className='text-xl md:text-3xl text-indigo-900 max-w-72
           md:max-w-md'>connect with global community on pingup</p>
         </div>
+        <span className='md:h-10'></span>
       </div>
+      {/* right side: Login form */}
+      <div className='flex-1 flex items-center justify-center p-6 sm:p-10'></div>
 
       
     </div>
