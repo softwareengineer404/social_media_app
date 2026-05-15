@@ -7,8 +7,10 @@ import ChatBox from './pages/ChatBox'
 import Connections from './pages/Connections'
 import Discover from './pages/discover'
 import Profile from './pages/Profile'
-// import CreatePost from './pages/CreatePost'
+import CreatePost from './pages/CreatePost'
+import {useUser} from '@clerk/clerk-react'
 const App = () => {
+  const {user} = useUser()
   return (
     <>
       <Routes>
