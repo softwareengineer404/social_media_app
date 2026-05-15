@@ -34,8 +34,9 @@ const Login = () => {
         <span className='md:h-10'></span>
       </div>
       {/* right side: Login form */}
-      <div className='flex-1 flex items-center justify-center p-6 sm:p-10'></div>
-
+      <div className='flex-1 flex items-center justify-center p-6 sm:p-10'>
+        <SignIn />
+      </div>
       
     </div>
   )
