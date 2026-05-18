@@ -1,11 +1,13 @@
 import React from 'react'
-import { assets } from '../assets/assets'
+import { assets, dummyUserData } from '../assets/assets'
 import MenuItems from './MenuItems'
 import { CirclePlus } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
-
+import {UserButton, userClerk} from '@clerk/clerk-react'
 const Sidebar = ({sidebarOpen, setSidebarOpen}) => {
     const navigate = useNavigate()
+    const user = dummyUserData
+    const {signout} = useClerk()
   return (
     <div className={`w-60 xl:w-72 bg-white border-r border-gray-200 flex flex-col
     justify-between items-center max-sm:absolute top-0 bottom-0 z-20
@@ -24,7 +26,16 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}) => {
           Create Post
         </Link>
       </div>
-        
+        <div className='w-full border-t border-gray-200 p-4 px-7 flex items-center
+        justify-between'>
+          <div className='flex gap-2 items-center cursor-pointer'>
+            <UserButton />
+            <div>
+              <h1 className='text-sm font-medium'>{user.full_name}</h1>
+              <p className='text-xs text-gray-500'>@{user.user_name}</p>
+            </div>
+          </div>
+        </div>
     </div>
   )
 }
