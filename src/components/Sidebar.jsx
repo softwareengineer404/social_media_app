@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets, dummyUserData } from '../assets/assets'
 import MenuItems from './MenuItems'
-import { CirclePlus } from 'lucide-react' //Purpose: Imports the plus-circle icon from the icon library
+import { CirclePlus, LogOut } from 'lucide-react' //Purpose: Imports the plus-circle icon from the icon library
 import { Link, useNavigate } from 'react-router-dom' //Imports navigation tools for moving between pages.
 import { UserButton, useClerk } from '@clerk/clerk-react' //Imports Clerk authentication components and functions
 const Sidebar = ({sidebarOpen, setSidebarOpen}) => {
@@ -35,6 +35,8 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}) => {
               <p className='text-xs text-gray-500'>@{user.user_name}</p>
             </div>
           </div>
+          <LogOut onClick={signOut} className='w-4.5 text-gray-400
+          hover:text-gray-700 transition cursor-pointer'/>
         </div>
     </div>
   )
