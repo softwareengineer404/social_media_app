@@ -1,13 +1,13 @@
 import React from 'react'
 import { assets, dummyUserData } from '../assets/assets'
 import MenuItems from './MenuItems'
-import { CirclePlus } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
-import {UserButton, userClerk} from '@clerk/clerk-react'
+import { CirclePlus } from 'lucide-react' //Purpose: Imports the plus-circle icon from the icon library
+import { Link, useNavigate } from 'react-router-dom' //Imports navigation tools for moving between pages.
+import { UserButton, useClerk } from '@clerk/clerk-react' //Imports Clerk authentication components and functions
 const Sidebar = ({sidebarOpen, setSidebarOpen}) => {
     const navigate = useNavigate()
-    const user = dummyUserData
-    const {signout} = useClerk()
+    const user = dummyUserData //Stores fake user information in user variable.
+    const { signOut } = useClerk() //Gets logout function from Clerk.
   return (
     <div className={`w-60 xl:w-72 bg-white border-r border-gray-200 flex flex-col
     justify-between items-center max-sm:absolute top-0 bottom-0 z-20
