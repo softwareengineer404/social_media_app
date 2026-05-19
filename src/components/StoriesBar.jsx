@@ -9,8 +9,9 @@ const StoriesBar = () => {
         fetchStories()
     },[])
   return (
-    <div>
-        StoriesBar
+    <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scroolbar
+    overflow-x-auto px-4'>
+        
     </div>
   )
 }
