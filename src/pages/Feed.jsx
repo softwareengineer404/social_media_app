@@ -7,6 +7,7 @@ const Feed = () => {
   const [loading, setloading] = useState(true)
   const fetchFeeds = async () => {
     setfeeds(dummyPostData)
+    setloading(false)
   }
   useEffect(()=>{
     fetchFeeds()
@@ -23,7 +24,10 @@ const Feed = () => {
       </div>
       {/* right side bar */}
       <div>
-
+        <div>
+          <h1>Sponsored</h1>
+        </div>
+        <h1>Recent messages</h1>
       </div>
     </div>
   ) : <Loading />
