@@ -12,8 +12,19 @@ const Feed = () => {
     fetchFeeds()
   },[])
   return !loading ? (
-    <div>
-      Feed
+    <div className='h-full overflow-y-scroll no-scrollbar py-10 xl:pr-5 flex
+    items-start justify-center xl:gap-8'>
+      {/* Stories and Post lists */}
+      <div>
+        <h1>Stories here</h1>
+        <div className='p-4 space-y-6'>
+          List of post
+        </div>
+      </div>
+      {/* right side bar */}
+      <div>
+
+      </div>
     </div>
   ) : <Loading />
 }
