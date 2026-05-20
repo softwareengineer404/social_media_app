@@ -33,6 +33,13 @@ const StoriesBar = () => {
 
             </div>
             {/* story cards */}
+            {
+                stories.map((story, index)=> (
+                    <div key={index}>
+                        
+                    </div>
+                ))
+            }
         </div>
         
     </div>
