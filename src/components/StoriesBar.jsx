@@ -36,7 +36,11 @@ const StoriesBar = () => {
             {
                 stories.map((story, index)=> (
                     <div key={index}>
-                        
+                        <img src={story.user.profile_picture} alt=""
+                        className='absolute size-8 top-3 left-3 z-10 rounded-full
+                        ring ring-gray-100 shadow'/>
+                        <p>{story.content}</p>
+
                     </div>
                 ))
             }
