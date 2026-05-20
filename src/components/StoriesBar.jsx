@@ -1,5 +1,6 @@
 import React, { useEffect, useState}from 'react'
 import { dummyStoriesData } from '../assets/assets'
+import { Plus } from 'lucide-react'
 const StoriesBar = () => {
     const [stories, setStories] = useState([])
     const fetchStories = async () => {
@@ -9,7 +10,7 @@ const StoriesBar = () => {
         fetchStories()
     },[])
   return (
-    <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scroolbar
+    <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scrollbar
     overflow-x-auto px-4'>
         <div className='flex gap-4 pb-5'>
             {/* add story card */}
