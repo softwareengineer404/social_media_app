@@ -17,6 +17,14 @@ const StoriesBar = () => {
             [3/4] cursor-pointer hover:shadow-lg transition-all duration-200
             border-2 border-dashed border-indigo-300 bg-gradient-to-b
             from-indigo-50 to-white'>
+                <div className='h-full flex flex-col items-center justify-center
+                p-4'>
+                    <div className='size-10 bg-indigo-500 rounded-full flex
+                    items-center justify-center mb-3'>
+
+                    </div>
+
+                </div>
 
             </div>
             {/* story cards */}
