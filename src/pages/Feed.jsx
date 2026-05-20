@@ -1,10 +1,11 @@
 import React from 'react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Loading from '../components/Loading'
+import StoriesBar from '../components/StoriesBar'
 import { dummyPostData } from '../assets/assets'
 const Feed = () => {
-  const [feeds, setfeeds] = useState([]) //feeds store post data,  setfeeds update the value of feeds
-  const [loading, setloading] = useState(true)
+  const [feeds, setFeeds] = useState([]) //feeds store post data,  setfeeds update the value of feeds
+  const [loading, setLoading] = useState(true)
   const fetchFeeds = async () => {
     setfeeds(dummyPostData)
     setloading(false)
@@ -17,7 +18,7 @@ const Feed = () => {
     items-start justify-center xl:gap-8'>
       {/* Stories and Post lists */}
       <div>
-        <h1>Stories here</h1>
+        <StoriesBar />
         <div className='p-4 space-y-6'>
           List of post
         </div>
