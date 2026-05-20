@@ -21,8 +21,12 @@ const StoriesBar = () => {
                 p-4'>
                     <div className='size-10 bg-indigo-500 rounded-full flex
                     items-center justify-center mb-3'>
+                        <Plus className='w-5 h-5 text-white'/>
+
 
                     </div>
+                    <p className='text-sm font-medium text-slate-700
+                    text-center'>Create Story</p>
 
                 </div>
 
