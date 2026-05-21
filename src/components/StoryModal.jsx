@@ -1,7 +1,6 @@
-import React, {useState }from 'react'
+import React, {useState }from 'react' //useState → React Hook used to store and update data inside a component
 
 const StoryModal = () => {
-    const [mode,setMode] = useState("text")
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"]
     const [mode, setMode] = useState("text")
     const [background, setBackground] = useState(bgColors[0])
