@@ -48,6 +48,16 @@ const StoriesBar = () => {
                         truncate max-w-24'>{story.content}</p>
                         <p className='text-white absolute bottom-1 right-1 z-10
                         text-xs'>{moment(story.createdAt).fromNow()}</p>
+                        {
+                            story.media_type === "image" ?
+                            <img src={story.media_url} alt="" className='h-full
+                            w-full object-cover hover:scale-110 transition
+                            duration-500 opacity-70 hover:opacity-80'/>
+                            :
+                            <video src={story.media_url} className='h-full w-full
+                            object-cover hover:scale-110 transition duration-500
+                            opacity-70 hover:opacity-80'/>
+                        }
 
                     </div>
                 ))
