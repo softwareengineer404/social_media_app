@@ -39,7 +39,8 @@ const StoriesBar = () => {
                         <img src={story.user.profile_picture} alt=""
                         className='absolute size-8 top-3 left-3 z-10 rounded-full
                         ring ring-gray-100 shadow'/>
-                        <p>{story.content}</p>
+                        <p className='absolute top-18 left-3 text-white/60 text-sm
+                        truncate max-w-24'>{story.content}</p>
 
                     </div>
                 ))
