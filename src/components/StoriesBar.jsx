@@ -1,6 +1,7 @@
 import React, { useEffect, useState}from 'react'
 import { dummyStoriesData } from '../assets/assets'
 import { Plus } from 'lucide-react'
+import moment from 'moment'
 const StoriesBar = () => {
     const [stories, setStories] = useState([])
     const fetchStories = async () => {
@@ -46,7 +47,7 @@ const StoriesBar = () => {
                         <p className='absolute top-18 left-3 text-white/60 text-sm
                         truncate max-w-24'>{story.content}</p>
                         <p className='text-white absolute bottom-1 right-1 z-10
-                        text-xs'>{story.createdAt}</p>
+                        text-xs'>{moment(story.createdAt).fromNow()}</p>
 
                     </div>
                 ))
