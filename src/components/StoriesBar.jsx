@@ -2,8 +2,11 @@ import React, { useEffect, useState}from 'react'
 import { dummyStoriesData } from '../assets/assets'
 import { Plus } from 'lucide-react'
 import moment from 'moment'
+import StoryModal from './StoryModel'
 const StoriesBar = () => {
     const [stories, setStories] = useState([])
+    const [showModal, setShowModal] = useState(false)
+    const [viewStory, setViewStory] = useState(null)
     const fetchStories = async () => {
         setStories(dummyStoriesData)
     }
@@ -13,7 +16,7 @@ const StoriesBar = () => {
   return (
     <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scrollbar
     overflow-x-auto px-4'>
-        <div className='flex gap-4 pb-5'>
+        <div onClick={()=>setShowModal(true)}className='flex gap-4 pb-5'>
             {/* add story card */}
             <div className='rounded-lg shadow-sm min-w-30 max-h-40 aspect-
             [3/4] cursor-pointer hover:shadow-lg transition-all duration-200
@@ -71,6 +74,9 @@ const StoriesBar = () => {
                 ))
             }
         </div>
+        {/*add story modal */}
+        {showModal && <StoryModal setShowModal={setShowModal} fetchStories=
+        {fetchStories}/>}
         
     </div>
   )
