@@ -1,6 +1,6 @@
 import React, {useState }from 'react' //useState → React Hook used to store and update data inside a component
 import { ArrowLeft } from 'lucide-react'
-const StoryModal = ({setShowModel, fetchStories}) => {
+const StoryModal = ({setShowModal, fetchStories}) => {
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"]
     const [mode, setMode] = useState("text")
     const [background, setBackground] = useState(bgColors[0])
@@ -20,9 +20,11 @@ const StoryModal = ({setShowModel, fetchStories}) => {
     text-white flex items-center justify-center p-4'>
         <div className='w-full max-w-md'>
             <div className='text-center mb-4 flex items-center justify-between'>
-                <button className='text-white p-2 cursor-pointer'>
+                <button onClick={()=> setShowModal(false)} className='text-white p-2 cursor-pointer'>
                     <ArrowLeft />
                 </button>
+                <h2 className='text-lg font-semibold'>Create Story</h2>
+                <span className="w-10"></span>
                 
             </div>
         </div>
