@@ -5,8 +5,15 @@ const StoryModal = () => {
     const [mode, setMode] = useState("text")
     const [background, setBackground] = useState(bgColors[0])
     const [text, setText] = useState("")
-    const [media, setMedia] = useState("null")
-    const [previewUrl, setPreviewUrl] = useState("null")
+    const [media, setMedia] = useState(null)
+    const [previewUrl, setPreviewUrl] = useState(null)
+    const handleMediaUpload = (e)=>{
+        const file = e.target.files?.[0]
+        if(file){
+            setMedia(file)
+            setPreviewUrl(URL.createObjectURL(file))
+        }
+    }
   return (
     <div>
         
