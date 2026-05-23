@@ -1,5 +1,5 @@
 import React, {useState }from 'react' //useState → React Hook used to store and update data inside a component
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, TextIcon } from 'lucide-react'
 const StoryModal = ({setShowModal, fetchStories}) => {
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"]
     const [mode, setMode] = useState("text")
@@ -52,6 +52,11 @@ const StoryModal = ({setShowModal, fetchStories}) => {
                     cursor-pointer' style={{background: color}} onClick={()=>setBackground(color)}/>
                 ))}
 
+            </div>
+            <div className='flex gap-2 mt-4'>
+                <button>
+                    <TextIcon size={18}/> Text
+                </button>
             </div>
         </div>
         
