@@ -70,6 +70,25 @@ const StoryModal = ({setShowModal, fetchStories}) => {
                     <TextIcon size={18} />
                     Text
                 </button>
+                <label
+                    className={`flex-1 flex items-center justify-center gap-2
+                    p-2 rounded cursor-pointer ${
+                    mode === 'media'
+                    ? 'bg-white text-black'
+                    : 'bg-zinc-800'
+                    }`}
+                    >
+                        <input
+                            onChange={(e)=>{
+                                handleMediaUpload(e)
+                                setMode('media')
+                            }}
+                            type="file"
+                            accept="image/*, video/*"
+                            className="hidden"
+                        />
+                </label>
+              
             </div>
         </div>
         
