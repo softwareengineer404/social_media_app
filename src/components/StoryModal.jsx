@@ -33,6 +33,14 @@ const StoryModal = ({setShowModal, fetchStories}) => {
                     <textarea className='bg-transparent text-white w-full h-full
                     p-6 text-lg resize-none focus:outline-none' placeholder="what is on your mind?" onChange={{e}=>setText(e.target.value)} value={text}/>
                 )}
+                {
+                   mode === 'media' && previewUrl && (
+                    media?.type.startsWith('image') ? (
+                        <img src={previewUrl} alt="" className='object-contain
+                        max-h-full'/>
+                    )
+                   )
+                }
 
             </div>
         </div>
