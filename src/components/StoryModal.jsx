@@ -1,5 +1,5 @@
 import React, {useState }from 'react' //useState → React Hook used to store and update data inside a component
-import { ArrowLeft, TextIcon } from 'lucide-react'
+import { ArrowLeft, TextIcon, Upload } from 'lucide-react'
 const StoryModal = ({setShowModal, fetchStories}) => {
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"]
     const [mode, setMode] = useState("text")
@@ -85,8 +85,8 @@ const StoryModal = ({setShowModal, fetchStories}) => {
                             }}
                             type="file"
                             accept="image/*, video/*"
-                            className="hidden"
-                        />
+                            className="hidden"/>
+                            <Upload size={18}/> Photo/Video
                 </label>
               
             </div>
