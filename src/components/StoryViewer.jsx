@@ -1,6 +1,9 @@
 import React from 'react'
-import { BadgeCheck } from 'lucide-react'
+import { BadgeCheck, X} from 'lucide-react'
 const StoryViewer = ({viewStory, setViewStory}) => {
+    const handleClose = ()=>{
+        setViewStory(null)
+    }
   return (
     <div className='fixed inset-0 h-screen bg-black bg-opacity-90 z-110 flex
     items-center justify-center' style={{backgroundColor: viewStory.media_type ===
@@ -25,6 +28,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
 
             </div>
         </div>
+
     
         
     </div>
