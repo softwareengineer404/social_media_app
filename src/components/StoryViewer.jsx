@@ -14,7 +14,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
             case 'video':
                 return (
                     <video onEnded={()=>setViewStory(nul)} src={viewStory.media_url}
-                    className='max-h-screen'/>
+                    className='max-h-screen' controls autoplay/>
                 );
             case 'text':
                 return (
@@ -35,7 +35,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
         {/* progress bar */}
         <div className='absolute top-0 left-0 w-full h-1 bg-gray-700'>
             <div className='h-full bg-white transition-all duration-100 linear' style=
-            {{width: '50'}}>
+            {{width: '50%'}}>
 
             </div>
 
@@ -58,7 +58,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
         </button>
         {/* content wrapper */}
         <div className='max-w-[90vw] max-h-[90vh] flex items-center justify-center'>
-            {renderContent}
+            {renderContent()}
         </div>
     </div>
   )
