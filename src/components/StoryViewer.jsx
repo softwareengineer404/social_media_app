@@ -4,7 +4,16 @@ const StoryViewer = ({viewStory, setViewStory}) => {
     const [progress, setProgress] = useState(0)
     useEffect(()=>{
         let timer, progressInterval;
-        if()
+        if(viewStory && viewStory.media_type !== 'video'){
+            setProgress(0)
+            const duration = 10000;
+            const setTime = 100;
+            let elapsed = 0;
+            progressInterval = setInterval(() => {
+                elapsed += setTime;
+                setProgress((elapsed / duration) * 100);
+            }, setTime);
+        }
     }, {viewStory, setViewStory})
     const handleClose = ()=>{
         setViewStory(null)
