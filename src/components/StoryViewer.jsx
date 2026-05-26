@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BadgeCheck, X} from 'lucide-react'
 const StoryViewer = ({viewStory, setViewStory}) => {
+    const [progress, setProgress] = useState(0)
+    useEffect(()=>{}, {viewStory, setViewStory})
     const handleClose = ()=>{
         setViewStory(null)
     }
