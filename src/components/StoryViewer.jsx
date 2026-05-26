@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { BadgeCheck, X} from 'lucide-react'
 const StoryViewer = ({viewStory, setViewStory}) => {
     const [progress, setProgress] = useState(0)
-    useEffect(()=>{}, {viewStory, setViewStory})
+    useEffect(()=>{
+        let timer, progressInterval;
+        if()
+    }, {viewStory, setViewStory})
     const handleClose = ()=>{
         setViewStory(null)
     }
+    if(!viewStory) return null
     const renderContent = ()=>{
         switch (viewStory.media_type) {
             case 'image':
