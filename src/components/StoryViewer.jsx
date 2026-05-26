@@ -24,7 +24,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
                     </div>
                 );
             default:
-                break;
+                return null;
         }
     }
   return (
@@ -56,7 +56,10 @@ const StoryViewer = ({viewStory, setViewStory}) => {
         font-bold focus:outline-none'>
             <X className='w-8 h-8 hover:scale-110 transition cursor-pointer'/>
         </button>
-        
+        {/* content wrapper */}
+        <div className='max-w-[90vw] max-h-[90vh] flex items-center justify-center'>
+            {renderContent}
+        </div>
     </div>
   )
 }
