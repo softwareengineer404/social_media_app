@@ -4,6 +4,20 @@ const StoryViewer = ({viewStory, setViewStory}) => {
     const handleClose = ()=>{
         setViewStory(null)
     }
+    const renderContent = ()=>{
+        switch (viewStory.media_type) {
+            case 'image':
+                return (
+                    <img src={viewStory.media_url} alt="" className='max-w-full max-h-screen
+                    object-contain'/>
+                );
+            case 'video':
+                return (
+                    <video onEnded={()=>setViewStory(nul)} src={viewStory.media_url}
+                    className='max-h-screen'/>
+                )
+        }
+    }
   return (
     <div className='fixed inset-0 h-screen bg-black bg-opacity-90 z-110 flex
     items-center justify-center' style={{backgroundColor: viewStory.media_type ===
