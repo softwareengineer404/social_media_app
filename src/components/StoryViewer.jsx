@@ -15,7 +15,16 @@ const StoryViewer = ({viewStory, setViewStory}) => {
                 return (
                     <video onEnded={()=>setViewStory(nul)} src={viewStory.media_url}
                     className='max-h-screen'/>
-                )
+                );
+            case 'text':
+                return (
+                    <div className='w-full h-full flex items-center justify-center p-8
+                    text-white text-2xl text-center'>
+                        {viewStory.content}
+                    </div>
+                );
+            default:
+                break;
         }
     }
   return (
