@@ -13,6 +13,14 @@ const StoryViewer = ({viewStory, setViewStory}) => {
                 elapsed += setTime;
                 setProgress((elapsed / duration) * 100);
             }, setTime);
+            //close story after duration(10sec)
+            timer = setTimeout(()=>{
+                setViewStory(null)
+            }, duration)
+        }
+        return ()=>{
+            clearTimeout(timer);
+            clearInterval(progressInterval)
         }
     }, {viewStory, setViewStory})
     const handleClose = ()=>{
