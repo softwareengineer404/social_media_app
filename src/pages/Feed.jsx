@@ -20,7 +20,9 @@ const Feed = () => {
       <div>
         <StoriesBar />
         <div className='p-4 space-y-6'>
-          List of post
+          {feeds.map((post)=>(
+            <PostCard key={post_id} post={post}/>
+          ))}
         </div>
       </div>
       {/* right side bar */}
