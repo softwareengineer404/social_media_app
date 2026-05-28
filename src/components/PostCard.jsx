@@ -1,5 +1,6 @@
 import React from 'react'
 import { BadgeCheck } from 'lucide-react'
+import moment from 'moment'
 const PostCard = ({post}) => {
   return (
     <div className='bg-white rounded-xl shadow p-4 space-y-4 w-full max-w-2xl'>
@@ -12,6 +13,9 @@ const PostCard = ({post}) => {
                     <span>{post.user.full_name}</span>
                     <BadgeCheck className='w-4 h-4 text-blue-500'/>
                 </div>
+                <div className='text-gray-500 text-sm'>@{post.user.username} . {moment(post.createdAt).fromNow()}</div>
+                
+                
             </div>
 
         </div>
