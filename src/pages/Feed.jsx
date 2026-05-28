@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Loading from '../components/Loading'
 import StoriesBar from '../components/StoriesBar'
 import { dummyPostData } from '../assets/assets'
+import PostCard from '../components/PostCard'
 const Feed = () => {
   const [feeds, setFeeds] = useState([]) //feeds store post data,  setfeeds update the value of feeds
   const [loading, setLoading] = useState(true)
