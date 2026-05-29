@@ -22,7 +22,7 @@ const PostCard = ({post}) => {
         </div>
           {/* post content */}
           {post.content && <div className='text-gray-800 text-sm
-          whitespace-pre-line' dangerouslySetInnerHTML={{__html: post.content}}/>}
+          whitespace-pre-line' dangerouslySetInnerHTML={{__html: postWithHashtags}}/>}
         {/* Images */}
         <div className='grid grid-cols-2 gap-2'>
             {post.image_urls.map((img, index)=>(
