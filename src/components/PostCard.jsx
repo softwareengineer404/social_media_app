@@ -2,8 +2,7 @@ import React from 'react'
 import { BadgeCheck } from 'lucide-react'
 import moment from 'moment'
 const PostCard = ({post}) => {
-    const postWithHashtags = post.content.replace(/(#\w+)/g, '<span
-    class="text-indigo-600">$1</span>')
+    const postWithHashtags = post.content.replace(/(#\w+)/g, '<span class="text-indigo-600">$1</span>')
   return (
     <div className='bg-white rounded-xl shadow p-4 space-y-4 w-full max-w-2xl'>
         {/* user info */}
