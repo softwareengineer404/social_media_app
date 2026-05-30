@@ -32,6 +32,10 @@ const Feed = () => {
         flex-col gap-2 shadow'>
           <h3 className='text-slate-800 font-semibold'>Sponsored</h3>
           <img src={assets.sponsored_img} className='w-75 h-50 rounded-md' alt="" />
+          <p className='text-slate-600'>Email marketing</p>
+          <p className='text-slate-400'>Supercharge Your marketing with a powerful,
+            easy-to-use platform built for results.</p>
+          
         </div>
         <h1>Recent messages</h1>
       </div>
