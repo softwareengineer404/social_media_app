@@ -27,8 +27,9 @@ const Feed = () => {
         </div>
       </div>
       {/* right side bar */}
-      <div>
-        <div>
+      <div className='max-xl:hidden sticky top-0'>
+        <div className='max-w-xs bg-white text-xs p-4 rounded-md inline-flex
+        flex-col gap-2 shadow'>
           <h1>Sponsored</h1>
         </div>
         <h1>Recent messages</h1>
