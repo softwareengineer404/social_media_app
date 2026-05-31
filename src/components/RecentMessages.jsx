@@ -5,6 +5,10 @@ const RecentMessages = () => {
     const fetchRecentMessages = async () => {
         setMessages(dummyRecentMessagesData)
     }
+    useEffect(()={
+        fetchRecentMessages()
+
+    },[])
   return (
     <div>
         
