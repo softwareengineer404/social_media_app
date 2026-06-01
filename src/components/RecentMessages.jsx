@@ -21,6 +21,12 @@ const RecentMessages = () => {
                     hover:bg-slate-100'>
                         <img src={message.from_user_id.profile_picture} alt=""
                         className='w-8 h-8 rounded-full'/>
+                        <div className='w-full'>
+                            <div className='flex justify-between'>
+                                <p className='font-medium'>{message.from_user_id.full_name}</p>
+                                <p className='text-[10px] text-slate-400'>{moment(message.createdAt).fromNow()}</p>
+                            </div>
+                        </div>
                     </Link>
                 ))
             }
