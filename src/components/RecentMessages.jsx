@@ -6,7 +6,7 @@ const RecentMessages = () => {
     const fetchRecentMessages = async () => {
         setMessages(dummyRecentMessagesData)
     }
-    useEffect(()={
+    useEffect(()=>{
         fetchRecentMessages()
 
     },[])
