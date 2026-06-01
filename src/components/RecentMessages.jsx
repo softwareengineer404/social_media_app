@@ -26,6 +26,9 @@ const RecentMessages = () => {
                                 <p className='font-medium'>{message.from_user_id.full_name}</p>
                                 <p className='text-[10px] text-slate-400'>{moment(message.createdAt).fromNow()}</p>
                             </div>
+                            <div className='flex justify-between'>
+                                <p className='text-gray-500'>{message.text ? message.text : 'Media'}</p>
+                            </div>
                         </div>
                     </Link>
                 ))
