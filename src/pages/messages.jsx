@@ -14,7 +14,8 @@ const messages = () => {
         {/* connected users*/}
         <div className='flex flex-col gap-3'>
           {dummyConnectionsData.map((user)=>(
-            <div key={user._id}>
+            <div key={user._id} className='max-w-xl flex-wrap gap-5 p-6
+            bg-white shadow rounded-md'>
           )}
         </div>
           
