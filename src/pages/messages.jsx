@@ -1,5 +1,5 @@
 import React from 'react'
-import MessageSquare from 'lucide-react'
+import { Eye, MessageSquare }from 'lucide-react'
 const messages = () => {
   return (
     <div className='min-h-screen relative bg-slate-50'>
@@ -35,6 +35,11 @@ const messages = () => {
                 rounded bg-slate-100 hover:bg-slate-200 text-slate-800
                 active:scale-95 transition cursor-pointer gap-1'>
                   <MessageSquare className="w-4 h-4"/>
+                </button>
+                <button className='size-10 flex items-center justify-center text-sm
+                rounded bg-slate-100 hover:bg-slate-200 text-slate-800
+                active:scale-95 transition cursor-pointer'>
+                  <Eye className="w-4 h-4"/>
                 </button>
               </div>
             </div>
