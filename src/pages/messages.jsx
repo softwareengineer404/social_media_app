@@ -1,5 +1,5 @@
 import React from 'react'
-
+import MessageSquare from 'lucide-react'
 const messages = () => {
   return (
     <div className='min-h-screen relative bg-slate-50'>
@@ -29,6 +29,13 @@ const messages = () => {
                 <p className='font-medium text-slate-700'>{user.full_name}</p>
                 <p clsssName='text-slate-500'>@{user.username}</p>
                 <p className='text-sm text-gray-600'>{user.bio}</p>
+              </div>
+              <div>
+                <button className='size-10 flex items-center justify-center text-sm
+                rounded bg-slate-100 hover:bg-slate-200 text-slate-800
+                active:scale-95 transition cursor-pointer gap-1'>
+                  <MessageSquare className="w-4 h-4"/>
+                </button>
               </div>
             </div>
           ))}
