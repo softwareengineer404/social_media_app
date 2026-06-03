@@ -26,6 +26,9 @@ const messages = () => {
 
               <div>
                 {/* Content goes here */}
+                <p>{user.full_name}</p>
+                <p>@{user.username}</p>
+                <p>{user.bio}</p>
               </div>
             </div>
           ))}
