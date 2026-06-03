@@ -39,7 +39,7 @@ const messages = () => {
                 active:scale-95 transition cursor-pointer gap-1'>
                   <MessageSquare className="w-4 h-4"/>
                 </button>
-                <button className='size-10 flex items-center justify-center text-sm
+                <button onClick={() => navigate(`/messages/${user._id}`)} className='size-10 flex items-center justify-center text-sm
                 rounded bg-slate-100 hover:bg-slate-200 text-slate-800
                 active:scale-95 transition cursor-pointer'>
                   <Eye className="w-4 h-4"/>
