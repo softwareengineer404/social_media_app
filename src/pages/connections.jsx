@@ -10,7 +10,10 @@ import {
 const connections = () => {
   const navigate = useNavigate()
   const dataArray = [
-    {label: 'Follwers', value: followers, icon: Users }
+    {label: 'Follwers', value: followers, icon: Users },
+    {label: 'Follwing', value: following, icon: UserCheck },
+    {label: 'Pending', value: pendingConnections, icon: UserRoundPen },
+    {label: 'Connections', value: connections, icon: UserPlus },
   ]
   return (
     <div>
