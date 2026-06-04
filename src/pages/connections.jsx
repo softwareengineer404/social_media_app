@@ -8,6 +8,10 @@ import {
   dummyPendingConnectionsData as pendingConnections
 } from '../assets/assets'
 const connections = () => {
+  const navigate = useNavigate()
+  const dataArray = [
+    {label: 'Follwers', value: followers, icon: Users }
+  ]
   return (
     <div>
       
