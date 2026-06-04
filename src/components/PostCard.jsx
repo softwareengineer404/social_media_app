@@ -1,7 +1,8 @@
 import React, { useState }from 'react'
 import { BadgeCheck, Heart, MessageCircle, Share2 } from 'lucide-react'
 import moment from 'moment'
-
+import { dummyUserData } from '..assets/assets'
+import { useNavigate } from 'react-router-dom'
 const PostCard = ({post}) => {
     const postWithHashtags = post.content.replace(/(#\w+)/g, '<span class="text-indigo-600">$1</span>')
     const [likes, setLikes] = useState(post.likes_count)
@@ -9,6 +10,7 @@ const PostCard = ({post}) => {
     const handleLike = async () => {
 
     }
+    const navigate = useNavigate()
   return (
     <div className='bg-white rounded-xl shadow p-4 space-y-4 w-full max-w-2xl'>
         {/* user info */}
