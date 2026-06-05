@@ -23,6 +23,14 @@ const connections = () => {
         <h1 className='text-3xl font-bold text-slate-900 mb-2'>Connections</h1>
         <p className='text-slate-600'>Manage your network and discover new connections</p>
       </div>
+      {/* Countes */}
+      <div>
+        {dataArray.map((item, index)=>(
+          <div key={index} className='flex flex-col items-center justify-center
+          gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
+          </div>
+        ))}
+      </div>
       </div>
       
     </div>
