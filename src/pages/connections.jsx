@@ -28,6 +28,8 @@ const connections = () => {
         {dataArray.map((item, index)=>(
           <div key={index} className='flex flex-col items-center justify-center
           gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
+            <b>{item.value.length}</b>
+            <p className='text-slate-600'>{item.label}</p>
           </div>
         ))}
       </div>
