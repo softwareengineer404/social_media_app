@@ -39,9 +39,9 @@ const connections = () => {
       rounded-md p-1 bg-white shadow-sm'>
         {
           dataArray.map((tab) => (
-            <button
+            <button onClick={()=> setCurrentTab(tab.label)}
               key={tab.label}
-              className={`flex items-center px-3 py-1 text-sm
+              className={`cursor-pointer flex items-center px-3 py-1 text-sm
               rounded-md transition-colors ${
                 currentTab === tab.label
                   ? 'bg-white font-medium text-black'
