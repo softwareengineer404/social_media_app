@@ -24,7 +24,7 @@ const connections = () => {
         <p className='text-slate-600'>Manage your network and discover new connections</p>
       </div>
       {/* Countes */}
-      <div>
+      <div className='mb-8 flex flex-wrap gap-6'>
         {dataArray.map((item, index)=>(
           <div key={index} className='flex flex-col items-center justify-center
           gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
