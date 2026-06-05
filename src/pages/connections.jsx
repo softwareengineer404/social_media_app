@@ -8,6 +8,7 @@ import {
   dummyPendingConnectionsData as pendingConnections
 } from '../assets/assets'
 const connections = () => {
+  const [currentTab, setCurrentTab] = useState('Followers')
   const navigate = useNavigate()
   const dataArray = [
     {label: 'Follwers', value: followers, icon: Users },
@@ -32,6 +33,15 @@ const connections = () => {
             <p className='text-slate-600'>{item.label}</p>
           </div>
         ))}
+      </div>
+      {/* Tabs */}
+      <div>
+        {
+          dataArray.map((tab)=>(
+            <button key={tab.label} className={`flex items-center px-3 py-1 text-sm
+            rounded-md transition-colors `}></button>
+          ))
+        }
       </div>
       </div>
       
