@@ -35,7 +35,8 @@ const connections = () => {
         ))}
       </div>
       {/* Tabs */}
-      <div>
+      <div className='inline-flex flex flex-wrap items-center border border-gray-200
+      rounded-md p-1 bg-white shadow-sm'>
         {
           dataArray.map((tab)=>(
             <button key={tab.label} className={`flex items-center px-3 py-1 text-sm
