@@ -63,6 +63,14 @@ const connections = () => {
           ))
         }
       </div>
+      {/* Connections */}
+        <div>
+          {dataArray.find((item)=>item.label === currentTab).value.map((user)=>(
+            <div key={user._id} className='w-full max-w-88 flex gap-5 p-6 bg-white
+            shadow rounded-md'>
+          </div>
+          ))}
+        </div>
       </div>
       
     </div>
