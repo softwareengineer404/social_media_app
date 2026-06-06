@@ -70,6 +70,11 @@ const connections = () => {
             shadow rounded-md'>
               <img src={user.profile_picture} alt="" className="rounded-full w-12
               h-12 shadow-md mx-auto"/>
+              <div className='flex-1'>
+                <p className="font-medium text-slate-700">{user.full_name}</p>
+                <p className="text-slate-500">@{user.user_name}</p>
+                <p className="text-sm text-gray-600">{user.bio.slice(0, 30)}...</p>
+              </div>
           </div>
           ))}
         </div>
