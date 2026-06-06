@@ -74,6 +74,16 @@ const connections = () => {
                 <p className="font-medium text-slate-700">{user.full_name}</p>
                 <p className="text-slate-500">@{user.user_name}</p>
                 <p className="text-sm text-gray-600">{user.bio.slice(0, 30)}...</p>
+                <div className='flex max-sm:flex-col gap-2 mt-4'>
+                  {
+                    <button onClick={()=> navigate(`/profile/${user._id}`)}
+                    className='w-full p-2 text-sm rounded bg-gradient-to-r
+                    from-indigo-500 to-purple-600 hover:from-indigo-600
+                    hover:to-purple-700 active:scale-95 transition text-white cursor-pointer'>
+                      View Profile
+                    </button>
+                  }
+                </div>
               </div>
           </div>
           ))}
