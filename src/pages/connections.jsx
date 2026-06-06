@@ -92,6 +92,15 @@ const connections = () => {
                       </button>
                     )
                   }
+                  {
+                    currentTab === 'pending' && (
+                      <button className='w-full p-2 text-sm rounded bg-slate-100
+                      hover:bg-slate-200 text-black active:scale-95 transition
+                      cursor-pointer'>
+                        Accept
+                      </button>
+                    )
+                  }
                 </div>
               </div>
           </div>
