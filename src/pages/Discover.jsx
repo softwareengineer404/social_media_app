@@ -4,6 +4,17 @@ const Discover = () => {
   const [input, setInput] = useState('')
   const [users, setUsers] = useState(dummyConnectionsData)
   const [loading, setLoading] = useState(false)
+
+  const handleSearch = async (e) => {
+    if(e.key === 'enter'){
+      setUsers([])
+      setLoading(true)
+      setTimeout(()=>{
+        setUsers(dummyConnectionsData)
+        setLoading(false)
+      }, 1000)
+    }
+  }
   return (
     <div>
       
