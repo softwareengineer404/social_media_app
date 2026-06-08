@@ -14,6 +14,8 @@ const UserCard = ({user}) => {
         <div>
             <img src={user.profile_picture} alt="" className='rounded-full w-16
             shadow-md mx-auto'/>
+            <p className='mt-4 font-semibold'>{user.full_name}</p>
+            {user.username && <p className='text-gray-500 font-light'>@{user.username}</p>}
         </div>
     </div>
   )
