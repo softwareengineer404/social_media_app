@@ -1,5 +1,6 @@
 import React from 'react'
 import { dummyUserData } from '../assets/assets'
+import MapPin from 'lucide-react'
 const UserCard = ({user}) => {
     const currentUser = dummyUserData
     const handleFollow = async () => {
