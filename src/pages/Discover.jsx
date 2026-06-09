@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { dummyConnectionsData } from '../assets/assets'
+import { Search } from 'lucide-react'
+import UserCard from '../components/UserCard'
+import Loading from '../components/Loading'
 const Discover = () => {
   const [input, setInput] = useState('')
   const [users, setUsers] = useState(dummyConnectionsData)
   const [loading, setLoading] = useState(false)
 
   const handleSearch = async (e) => {
-    if(e.key === 'enter'){
+    if(e.key === 'Enter'){
       setUsers([])
       setLoading(true)
       setTimeout(()=>{
