@@ -34,7 +34,8 @@ const UserCard = ({user}) => {
         </div>
         <div>
             {/* Follow Button */}
-            <button>
+            <button className='w-full py-2 rounded-md flex justify-center
+            items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600'>
                 <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
                 (user._id) ? 'Following' : 'Follow'}
             </button>
