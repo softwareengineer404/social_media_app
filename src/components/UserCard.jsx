@@ -32,6 +32,12 @@ const UserCard = ({user}) => {
 
             </div>
         </div>
+        <div>
+            {/* Follow Button */}
+            <button>
+                <UserPlus className='w-4 h-4'/>
+            </button>
+        </div>
     </div>
   )
 }
