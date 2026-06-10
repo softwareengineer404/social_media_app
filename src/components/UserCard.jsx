@@ -32,7 +32,7 @@ const UserCard = ({user}) => {
 
             </div>
         </div>
-        <div>
+        <div className='flex mt-4 gap-2'>
             {/* Follow Button */}
             <button className='w-full py-2 rounded-md flex justify-center
             items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600
