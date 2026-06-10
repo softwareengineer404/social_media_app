@@ -35,7 +35,8 @@ const UserCard = ({user}) => {
         <div>
             {/* Follow Button */}
             <button>
-                <UserPlus className='w-4 h-4'/>
+                <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
+                (user._id) ? 'Following' : 'Follow'}
             </button>
         </div>
     </div>
