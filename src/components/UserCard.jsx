@@ -50,6 +50,8 @@ const UserCard = ({user}) => {
                     currentUser?.connections.includes(user._id) ?
                     <MessageCircle className='w-5 h-5 group-hover:scale-105
                     transition'/>
+                    :
+                    <Plus className='w-5 h-5 group-hover:scale-105 transition'/>
                 }
             </button>
         </div>
