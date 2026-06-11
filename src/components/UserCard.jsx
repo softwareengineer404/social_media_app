@@ -47,7 +47,9 @@ const UserCard = ({user}) => {
             justify-center w-16 border text-slate-500 group rounded-md
             cursor-pointer active:scale-95 transition'>
                 {
-                    cu
+                    currentUser?.connections.includes(user._id) ?
+                    <MessageCircle className='w-5 h-5 group-hover:scale-105
+                    transition'/>
                 }
             </button>
         </div>
