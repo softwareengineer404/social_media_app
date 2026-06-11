@@ -42,6 +42,14 @@ const UserCard = ({user}) => {
                 <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
                 (user._id) ? 'Following' : 'Follow'}
             </button>
+            {/* Connections request button / message button */}
+            <button onClick={handleConnectionRequest} className='flex items-center
+            justify-center w-16 border text-slate-500 group rounded-md
+            cursor-pointer active:scale-95 transition'>
+                {
+                    cu
+                }
+            </button>
         </div>
     </div>
   )
