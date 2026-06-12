@@ -16,10 +16,10 @@ const profile = () => {
     fetchUser()
   },[])
   return user ? (
-    <div>
-      <div>
+    <div className='relative h-full overflow-y-scroll bg-gray-50 p-6'>
+      <div className='max-w-3xl mx-auto'>
         {/* profile card */}
-        <div>
+        <div className='bg-white rounded-2xl shadow overflow-hidden'>
 
         </div>
       </div>
