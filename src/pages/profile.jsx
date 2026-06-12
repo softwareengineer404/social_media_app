@@ -12,11 +12,19 @@ const profile = () => {
     setUser(dummyUserData)
     setPosts(dummyPostsData)
   }
-  return (
+  useEffect(()=>{
+    fetchUser()
+  },[])
+  return user ? (
     <div>
-      
+      <div>
+        {/* profile card */}
+        <div>
+
+        </div>
+      </div>
     </div>
-  )
+  ) : (<Loading />)
 }
 
 export default profile
