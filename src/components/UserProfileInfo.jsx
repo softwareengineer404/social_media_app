@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserProfileInfo = () => {
+const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
   return (
     <div>
         
