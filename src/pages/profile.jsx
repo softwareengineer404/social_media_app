@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { dummyPostsData, dummyUserData } from '../assets/assets'
 import { useEffect } from 'react'
+import UserProfileInfo from '../components/UserProfileInfo'
 const profile = () => {
   const {profile} = useParams()
   const [user, setUser] = useState(null)
@@ -26,6 +27,9 @@ const profile = () => {
             {user.cover_photo && <img src={user.cover_photo} alt=''
             className='w-full h-full object-cover'/>}
           </div>
+          {/* user info */}
+          <UserProfileInfo user={user} posts={posts} profileId={profileId}
+          setShowEdit={setShowEdit}/>
         </div>
       </div>
     </div>
