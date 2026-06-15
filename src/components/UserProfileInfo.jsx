@@ -29,6 +29,7 @@ const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
                             Edit
                         </button>}
                 </div>
+                <p className='text-gray-700 text-sm max-w-md mt-4'>{user.bio}</p>
             </div>
         </div>
     </div>
