@@ -30,6 +30,12 @@ const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
                         </button>}
                 </div>
                 <p className='text-gray-700 text-sm max-w-md mt-4'>{user.bio}</p>
+                <div>
+                    <span className='flex items-center gap-1.5'>
+                        <MapPin className='w-4 h-4'/>
+                        {user.location ? user.location : 'Add location'}
+                    </span>
+                </div>
             </div>
         </div>
     </div>
