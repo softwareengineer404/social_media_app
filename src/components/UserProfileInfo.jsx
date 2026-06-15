@@ -1,5 +1,5 @@
 import React from 'react'
-import { Verified, PenBox } from 'lucide-react'
+import { Verified, PenBox, MapPin } from 'lucide-react'
 const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
   return (
     <div className='relative py-4 px-6 md:8 bg-white'>
