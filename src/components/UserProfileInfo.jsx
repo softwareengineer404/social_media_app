@@ -1,5 +1,5 @@
 import React from 'react'
-import { Verified, PenBox, MapPin } from 'lucide-react'
+import { Verified, PenBox, MapPin, Calendar } from 'lucide-react'
 const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
   return (
     <div className='relative py-4 px-6 md:8 bg-white'>
@@ -34,6 +34,11 @@ const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
                     <span className='flex items-center gap-1.5'>
                         <MapPin className='w-4 h-4'/>
                         {user.location ? user.location : 'Add location'}
+                    </span>
+                    <span className='flex items-center gap-1.5'>
+                        <Calendar className='w-4 h-4'/>
+                        Joined <span className='font-medium'>{moment(user.createdAt).
+                        fromNow()}</span>
                     </span>
                 </div>
             </div>
