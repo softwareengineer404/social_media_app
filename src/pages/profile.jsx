@@ -31,6 +31,16 @@ const profile = () => {
           <UserProfileInfo user={user} posts={posts} profileId={profileId}
           setShowEdit={setShowEdit}/>
         </div>
+        {/* Tabs */}
+        <div className='mt-6'>
+          <div className='bg-white rounded-xl shadow p-1 flex max-w-md mx-auto'>
+            {["posts", "media", "likes"].map((tab)=>(
+              <button>
+
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   ) : (<Loading />)
