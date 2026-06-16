@@ -46,6 +46,8 @@ const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
                 pt-4'>
                     <div>
                         <span className='sm:text-xl font-bold text-gray-900'>{posts.length}</span>
+                        <span className='text-xs sm:text-sm text-gray-500 ml-1.
+                        5'>Posts</span>
                     </div>
                 </div>
             </div>
