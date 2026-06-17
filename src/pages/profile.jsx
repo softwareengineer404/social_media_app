@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { dummyPostsData, dummyUserData } from '../assets/assets'
 import { useEffect } from 'react'
 import UserProfileInfo from '../components/UserProfileInfo'
@@ -52,6 +52,16 @@ const profile = () => {
               {posts.map((post)=> <PostCard key={post._id} post={post}/>)}
             </div>
           )}
+          {/* Media */}
+            {activeTab === 'media' && (
+              <div className='flex flex-wrap mt-6 max-w-6xl'>
+                {
+                  posts.filter((post)=>post.image_urls.length > 0).map((post)=>(
+                    <></>
+                  ))
+                }
+              </div>
+            )}
         </div>
       </div>
     </div>
