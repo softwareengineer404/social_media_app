@@ -60,6 +60,10 @@ const profile = () => {
                     <>
                     {post.image_urls.map((image, index)=>(
                       <Link target='_blank' to={image} key={index}
+                      className='relative group'>
+                        <img src={image} key={index} className='-64 aspect-video
+                        object-cover' alt="" />
+                      </Link>
                     ))}
                     </>
                   ))
