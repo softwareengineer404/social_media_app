@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { dummyPostsData, dummyUserData } from '../assets/assets'
 import { useEffect } from 'react'
 import UserProfileInfo from '../components/UserProfileInfo'
+import PostCard from '../components/PostCard'
 const profile = () => {
   const {profile} = useParams()
   const [user, setUser] = useState(null)
