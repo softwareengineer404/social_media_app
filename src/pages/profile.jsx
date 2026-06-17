@@ -57,7 +57,11 @@ const profile = () => {
               <div className='flex flex-wrap mt-6 max-w-6xl'>
                 {
                   posts.filter((post)=>post.image_urls.length > 0).map((post)=>(
-                    <></>
+                    <>
+                    {post.image_urls.map((image, index)=>(
+                      <Link target='_blank' to={image} key={index}
+                    ))}
+                    </>
                   ))
                 }
               </div>
