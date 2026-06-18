@@ -13,10 +13,12 @@ const CreatePost = () => {
           <h1 className='text-3xl font-bold text-slate-900 mb-2'>Create Post</h1>
           <p className='text-slate-600'>Share your thoughts with the world</p>
         </div>
-        <div>
+        <div className='max-w-xl bg-white p-4 sm:p-8 sm:pb-3 rounded-xl shadow-md
+        space-y-4'>
           {/* Header */}
-          <div>
-            <img/>
+          <div className='flex items-center gap-3'>
+            <img src={user.profile_picture} alt="" className='w-12 h-12
+            rounded-full shadow'/>
             <div>
               <h2 className='font-semibold'>{user.full_name}</h2>
               <p className='text-sm text-gray-500'>@{user.username}</p>
