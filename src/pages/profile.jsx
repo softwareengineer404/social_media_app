@@ -9,7 +9,7 @@ const profile = () => {
   const [user, setUser] = useState(null)
   const [posts, setPosts] = useState([])
   const [activeTab, setActiveTab] = useState('posts')
-  const [showEdit, setShowEdit] = useState('false')
+  const [showEdit, setShowEdit] = useState(false)
   const fetchUser = async () => {
     setUser(dummyUserData)
     setPosts(dummyPostsData)
@@ -75,6 +75,8 @@ const profile = () => {
             )}
         </div>
       </div>
+      {/* Edit profile modal */}
+      {showEdit && <p>show profile edit</p>}
     </div>
   ) : (<Loading />)
 }
