@@ -32,7 +32,10 @@ const CreatePost = () => {
           {
             images.length > 0 && <div className='flex flex-wrap gap-2 mt-4'>
               {images.map((image, i)=>(
-                <div></div>
+                <div key={i} className='relative group'>
+                  <img src={URL.createObjectURL(image)} className='h-20
+                  rounded-md' alt="" />
+                </div>
               )}
               <div/>
           }
