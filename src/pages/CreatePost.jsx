@@ -28,6 +28,14 @@ const CreatePost = () => {
           <textarea className='w-full resize-none max-h-20 mt-4 text-sm
           outline-none placeholder-gray-400' placeholder="what's happening?"
           onChange={(e)=>setContent(e.target.value)} value={console}/>
+          {/* Images */}
+          {
+            images.length > 0 && <div className='flex flex-wrap gap-2 mt-4'>
+              {images.map((image, i)=>(
+                <div></div>
+              )}
+              <div/>
+          }
         </div>
       </div>
     </div>
