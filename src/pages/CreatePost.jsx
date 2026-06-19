@@ -24,6 +24,10 @@ const CreatePost = () => {
               <p className='text-sm text-gray-500'>@{user.username}</p>
             </div>
           </div>
+          {/* Text Area */}
+          <textarea className='w-full resize-none max-h-20 mt-4 text-sm
+          outline-none placeholder-gray-400' placeholder="what's happening?"
+          onChange={(e)=>setContent(e.target.value)} value={console}/>
         </div>
       </div>
     </div>
