@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { dummyUserData } from '../assets/assets'
+import { X } from 'lucide-react'
 const CreatePost = () => {
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])
@@ -39,6 +40,7 @@ const CreatePost = () => {
                   !== i))} className='absolute hidden group-hover:flex
                   justify-center items-center top-0 right-0 bottom-0 left-0
                   bg-black/40 rounded-md cursor-pointer'>
+                    <X className="w-6 h-6 text-white"/>
 
                   </div>
                 </div>
