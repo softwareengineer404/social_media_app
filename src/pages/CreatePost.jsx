@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { dummyUserData } from '../assets/assets'
-import { X } from 'lucide-react'
+import { X, Image } from 'lucide-react'
 const CreatePost = () => {
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])
@@ -28,7 +28,7 @@ const CreatePost = () => {
           {/* Text Area */}
           <textarea className='w-full resize-none max-h-20 mt-4 text-sm
           outline-none placeholder-gray-400' placeholder="what's happening?"
-          onChange={(e)=>setContent(e.target.value)} value={console}/>
+          onChange={(e)=>setContent(e.target.value)} value={content}/>
           {/* Images */}
           {
             images.length > 0 && <div className='flex flex-wrap gap-2 mt-4'>
@@ -45,8 +45,15 @@ const CreatePost = () => {
                   </div>
                 </div>
               ))}
-              <div/>
+            <div/>
           }
+            {/* Bottom Bar */} 
+            <div>
+              <label htmlFor="images" className='flex items-center gap-2 text-sm
+              text-gray-500 hover:text-gray-700 transition cursor-pointer'>
+                <Image className='size-6'/>
+              </label>
+            </div>
         </div>
       </div>
     </div>
