@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { dummyUserData } from '../assets/assets'
 import { X, Image } from 'lucide-react'
+import toast from 'react-hot-toast'
 const CreatePost = () => {
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false)
   const user = dummyUserData;
+const handleSubmit = async () => {
+
+}
   return (
     <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white'>
       <div className='max-w-6xl mx-auto p-6'>
@@ -56,7 +60,14 @@ const CreatePost = () => {
               </label>
               <input type="file" id="images" accepts='image/*' hidden multiple
               onChange={(e)=>setImages([...images, ...e.target.files])}/>
-              <button className='text-sm bg-gradient-to-r from-indigo-500
+              <button disabled ={loading} onClick={()=> toast.promise(
+                handleSubmit(),
+                {
+                  loading: 'uploading ...',
+                  success: <p>Post Added </p>,
+                  error: <p>Post Not Added</p>
+                }
+              )}className='text-sm bg-gradient-to-r from-indigo-500
               t0-purple-600 hover:from-indigo-600 hover:to-purple-700
               active:scale-95 transition text-white font-medium px-8 py-2
               rounded-md cursor-pointer'>
