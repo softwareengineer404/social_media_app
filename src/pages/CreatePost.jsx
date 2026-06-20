@@ -54,6 +54,8 @@ const CreatePost = () => {
               text-gray-500 hover:text-gray-700 transition cursor-pointer'>
                 <Image className='size-6'/>
               </label>
+              <input type="file" id="images" accepts='image/*' hidden multiple
+              onChange={(e)=>setImages([...images, ...e.target.files])}/>
             </div>
         </div>
       </div>
