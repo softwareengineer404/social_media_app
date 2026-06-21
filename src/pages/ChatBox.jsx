@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { dummyMessagesData, dummyUserData } from '../assets/assets'
 
 const ChatBox = () => {
@@ -7,6 +7,12 @@ const ChatBox = () => {
   const [image, setImage] = useState(null)
   const [user, setUser] = useState(dummyUserData)
   const messagesEndRef = useRef(null)
+  const sendMessage = async () => {
+
+  }
+  useEffect(()=>{
+    messagesEndRef.current?.scrollIntoView({behavior: "smooth" })
+  },[messages])
   return (
     <div>
       
