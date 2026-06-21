@@ -19,7 +19,10 @@ const ChatBox = () => {
       bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-gray-300'>
 
         <img src={user.profile_picture} alt="" className="size-8 rounded-full"/>
-        <div></div>
+        <div>
+          <p className="font-medium">{user.full_name}</p>
+          <p className="text-sm text-gray-500 -mt-1.5">@{user.username}</p>
+        </div>
       </div>
     </div>
   )
