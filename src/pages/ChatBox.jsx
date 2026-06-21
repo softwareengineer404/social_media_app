@@ -24,6 +24,17 @@ const ChatBox = () => {
           <p className="text-sm text-gray-500 -mt-1.5">@{user.username}</p>
         </div>
       </div>
+      <div>
+        <div>
+          {
+            messages.toSorted((a,b)=> new Date(a.createdAt) - new Date(b.
+            createdAt)).map((message, index)=>(
+              <div></div>
+            ))
+            
+          }
+        </div>
+      </div>
     </div>
   )
 }
