@@ -56,6 +56,11 @@ const ChatBox = () => {
           placeholder='Type a message...'
           onKeyDown={e=>e.key === 'Enter' && sendMessage()} onChange={(e)=>setText
           (e.target.value)} value={text} />
+          <label htmlFor="image">
+            <input type="file" id='image' accept="image/*" hidden onChange={(e)
+            =>setImage(e.target.files[0])}/>
+            
+          </label>
 
         </div>
       </div>
