@@ -24,12 +24,16 @@ const ChatBox = () => {
           <p className="text-sm text-gray-500 -mt-1.5">@{user.username}</p>
         </div>
       </div>
-      <div>
-        <div>
+      <div className='p-5 md:px-10 h-full overflow-y-scroll'>
+        <div className='space-y-4 max-w-4xl mx-auto'>
           {
             messages.toSorted((a,b)=> new Date(a.createdAt) - new Date(b.
             createdAt)).map((message, index)=>(
-              <div></div>
+              <div key={index} className={`flex flex-col ${message.to_user_id !== 
+              user._id ? 'items-start' : 'items-end'}`}>
+              
+                <div></div>
+              </div>
             ))
             
           }
