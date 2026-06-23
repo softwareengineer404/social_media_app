@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { dummyMessagesData, dummyUserData } from '../assets/assets'
-
+import { ImageIcon } from 'lucide-react'
 const ChatBox = () => {
   const messages = dummyMessagesData
   const [text, setText] = useState('')
@@ -57,6 +57,10 @@ const ChatBox = () => {
           onKeyDown={e=>e.key === 'Enter' && sendMessage()} onChange={(e)=>setText
           (e.target.value)} value={text} />
           <label htmlFor="image">
+            {
+              image ? <img src="" alt="" /> : <ImageIcon className='size-7
+              text-gray-400 cursor-pointer'/>
+            }
             <input type="file" id='image' accept="image/*" hidden onChange={(e)
             =>setImage(e.target.files[0])}/>
             
