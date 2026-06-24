@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { dummyUserData } from '../assets/assets'
+import { Pencil } from 'lucide-react';
 const ProfileModal = () => {
     const user = dummyUserData;
     const [editForm, setEditForm] = useState({
@@ -31,6 +32,11 @@ const ProfileModal = () => {
                                 <img src={editForm.profile_picture ? URL.createObjectURL
                                 (editForm.profile_picture) : user.profile_picture}
                                 alt="" className='w-24 h-24 rounded-full object-cover mt-2'/>
+                                <div className='absolute hidden group-hover/
+                                profile:flex top-0 left-0 right-0 bottom-0 bg-black/20
+                                rounded-full items-center justify-center'>
+                                    <Pencil className="w-5 h-5 text-white"/>
+                                </div>
                             </div>
                         </label>
                     </div>
