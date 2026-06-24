@@ -18,6 +18,15 @@ const ProfileModal = () => {
         <div className='max-w-2xl sm:py-6 mx-auto'>
             <div className='bg-white rounded-lg shadow p-6'>
                 <h1 className='text-2xl font-bold text-gray-900 mb-6'>Edit Profile</h1>
+                <form className='space-y-4' onSubmit={handleSaveProfile}>
+                    {/* Profile Picture */}
+                    <div>
+                        <label htmlFor="profile_picture" className='block text-sm
+                        font-medium text-gray-700 mb-1'>
+                            Profile Picture
+                        </label>
+                    </div>
+                </form>
             </div>
         </div>
 
