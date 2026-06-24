@@ -27,6 +27,11 @@ const ProfileModal = () => {
                             <input type="file" accept="image/*" id="profile_picture"
                             className="w-full p-3 border border-gray-200 rounded-lg"
                             onChange={(e)=>setEditForm({...editForm,profile_picture:e.target.files[0]})}/>
+                            <div>
+                                <img src={editForm.profile_picture ? URL.createObjectURL
+                                (editForm.profile_picture) : user.profile_picture}
+                                alt="" className='w-24 h-24 rounded-full object-cover mt-2'/>
+                            </div>
                         </label>
                     </div>
                 </form>
