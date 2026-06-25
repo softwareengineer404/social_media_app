@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { dummyPostsData, dummyUserData } from '../assets/assets'
 import { useEffect } from 'react'
 import UserProfileInfo from '../components/UserProfileInfo'
+import ProfileModal from '../components/ProfileModal'
 import PostCard from '../components/PostCard'
 const profile = () => {
   const {profile} = useParams()
@@ -76,7 +77,7 @@ const profile = () => {
         </div>
       </div>
       {/* Edit profile modal */}
-      {showEdit && <p>show profile edit</p>}
+      {showEdit && <ProfileModal setShowEdit={setShowEdit}/>}
     </div>
   ) : (<Loading />)
 }
