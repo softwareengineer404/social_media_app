@@ -8,6 +8,7 @@ const ProfileModal = () => {
         bio: user.bio,
         location: user.location,
         profile_picture: null,
+        cover_photo: null,
         full_name: user.full_name,
     })
     const handleSaveProfile = async (e) => {
@@ -27,7 +28,7 @@ const ProfileModal = () => {
                             Profile Picture
                             <input hidden type="file" accept="image/*" id="profile_picture"
                             className="w-full p-3 border border-gray-200 rounded-lg"
-                            onChange={(e)=>setEditForm({...editForm,profile_picture:e.target.files[0]})}/>
+                            onChange={(e)=>setEditForm({...editForm, profile_picture: e.target.files[0]})}/>
                             <div>
                                 <img src={editForm.profile_picture ? URL.createObjectURL
                                 (editForm.profile_picture) : user.profile_picture}
@@ -45,9 +46,17 @@ const ProfileModal = () => {
                     <label htmlFor="cover_photo" className="block text-sm font-medium
                     text-gray-700 mb-1">
                         Cover Photo
-                        <input hidden type="file" accept="image/*" id="profile_picture"
+                        <input hidden type="file" accept="image/*" id="cover_photo"
                         className="w-full p-3 border border-gray-200 rounded-lg"
-                        onChange={(e)=>setEditForm({...editForm,profile_picture:e.target.files[0]})}/>
+                        onChange={(e)=>setEditForm({...editForm, cover_photo: e.target.files[0]})}/>
+                        <div>
+                            <img src={editForm.cover_photo ? URL.createObjectURL
+                            (editForm.cover_photo) : user.cover_photo} alt=""
+                            className='w-80 h-40 rounded-lg bg-gradient-to-r
+                            from-indigo-200 via-purple-200 to-pink-200 object-cover
+                            mt-2'/>
+                            
+                        </div>
                     </label>
                 </div>  
                 </form>
