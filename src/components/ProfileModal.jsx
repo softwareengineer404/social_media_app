@@ -21,7 +21,7 @@ const ProfileModal = () => {
                 <h1 className='text-2xl font-bold text-gray-900 mb-6'>Edit Profile</h1>
                 <form className='space-y-4' onSubmit={handleSaveProfile}>
                     {/* Profile Picture */}
-                    <div>
+                    <div className='flex flex-col items-start gap-3'>
                         <label htmlFor="profile_picture" className='block text-sm
                         font-medium text-gray-700 mb-1'>
                             Profile Picture
