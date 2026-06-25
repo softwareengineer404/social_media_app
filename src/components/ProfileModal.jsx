@@ -25,7 +25,7 @@ const ProfileModal = () => {
                         <label htmlFor="profile_picture" className='block text-sm
                         font-medium text-gray-700 mb-1'>
                             Profile Picture
-                            <input type="file" accept="image/*" id="profile_picture"
+                            <input hidden type="file" accept="image/*" id="profile_picture"
                             className="w-full p-3 border border-gray-200 rounded-lg"
                             onChange={(e)=>setEditForm({...editForm,profile_picture:e.target.files[0]})}/>
                             <div>
@@ -40,6 +40,13 @@ const ProfileModal = () => {
                             </div>
                         </label>
                     </div>
+                {/* Cover Photo */} 
+                <div className='flex flex-col items-start gap-3'>
+                    <label htmlFor="cover_photo" className="block text-sm font-medium
+                    text-gray-700 mb-1">
+                        Cover Photo
+                    </label>
+                </div>  
                 </form>
             </div>
         </div>
