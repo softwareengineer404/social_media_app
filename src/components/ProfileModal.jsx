@@ -55,6 +55,11 @@ const ProfileModal = () => {
                             className='w-80 h-40 rounded-lg bg-gradient-to-r
                             from-indigo-200 via-purple-200 to-pink-200 object-cover
                             mt-2'/>
+                            <div className='absolute hidden group-hover/cover:flex
+                            top-0 left-0 right-0 bottom-0 bg-black/20 rounded-lg
+                            items-center justify-center'>
+                                <Pencil className="w-5 h-5 text-white"/>
+                            </div>
                             
                         </div>
                     </label>
