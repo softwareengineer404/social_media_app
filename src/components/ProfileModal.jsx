@@ -94,6 +94,16 @@ const ProfileModal = () => {
                     
                     
                 </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Location
+                    </label>
+                        <input type="text" className='w-full p-3 border border-gray-200
+                        rounded-lg' placeholder='please enter your location' onChange={(e)
+                        =>setEditForm({...editForm, location: e.target.value})} value={editForm.location}/>
+                    
+                    
+                </div>
                 </form>
             </div>
         </div>
