@@ -49,7 +49,7 @@ const ProfileModal = () => {
                         <input hidden type="file" accept="image/*" id="cover_photo"
                         className="w-full p-3 border border-gray-200 rounded-lg"
                         onChange={(e)=>setEditForm({...editForm, cover_photo: e.target.files[0]})}/>
-                        <div>
+                        <div className='group/cover relative'>
                             <img src={editForm.cover_photo ? URL.createObjectURL
                             (editForm.cover_photo) : user.cover_photo} alt=""
                             className='w-80 h-40 rounded-lg bg-gradient-to-r
