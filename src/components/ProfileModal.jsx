@@ -112,7 +112,7 @@ const ProfileModal = ({setShowEdit}) => {
                     <button type='submit' className='px-4 py-2 bg-gradient-to-r
                     from-indigo-500 to-purple-600 text-white rounded-lg
                     hover:from-indigo-600 hover:to-purple-700 transition
-                    cursor-pointer'>Save Changes</button>
+                    cursor-pointer'>giSave Changes</button>
                 </div>
                 </form>
             </div>
