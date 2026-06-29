@@ -81,8 +81,7 @@ const ProfileModal = ({setShowEdit}) => {
                         <input type="text" className='w-full p-3 border border-gray-200
                         rounded-lg' placeholder='please enter your user name' onChange={(e)
                         =>setEditForm({...editForm, username: e.target.value})} value={editForm.username}/>
-                    
-                    
+                
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -91,7 +90,6 @@ const ProfileModal = ({setShowEdit}) => {
                         <textarea rows={3} className='w-full p-3 border border-gray-200
                         rounded-lg' placeholder='please enter your bio' onChange={(e)
                         =>setEditForm({...editForm, bio: e.target.value})} value={editForm.bio}/>
-                    
                     
                 </div>
                 <div>
