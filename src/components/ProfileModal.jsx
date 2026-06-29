@@ -101,8 +101,7 @@ const ProfileModal = ({setShowEdit}) => {
                         <input type="text" className='w-full p-3 border border-gray-200
                         rounded-lg' placeholder='please enter your location' onChange={(e)
                         =>setEditForm({...editForm, location: e.target.value})} value={editForm.location}/>
-                    
-                    
+        
                 </div>
                 <div className='flex justify-end space-x-3 pt-6'>
                     <button onClick={()=> setShowEdit(false)} type='button
