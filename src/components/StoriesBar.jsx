@@ -81,7 +81,6 @@ const StoriesBar = () => {
         {/* View Story Modal */}
         {viewStory && <StoryViewer viewStory={viewStory} setViewStory=
         {setViewStory}/>}
-        
     </div>
   )
 }
