@@ -75,7 +75,7 @@ const ProfileModal = ({setShowEdit}) => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                        User Name
+                        User name
                     </label>
                         <input type="text" className='w-full p-3 border border-gray-200
                         rounded-lg' placeholder='please enter your user name' onChange={(e)
