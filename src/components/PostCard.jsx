@@ -24,9 +24,7 @@ const PostCard = ({post}) => {
                 </div>
                 <div className='text-gray-500 text-sm'>@{post.user.username} . {moment(post.createdAt).fromNow()}</div>
                 
-                
             </div>
-
         </div>
           {/* post content */}
           {post.content && <div className='text-gray-800 text-sm
