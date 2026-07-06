@@ -16,9 +16,7 @@ const MenuItems = ({setSidebarOpen}) => {
                 </NavLink>
             ))
         }
-        
     </div>
   )
 }
-
 export default MenuItems
