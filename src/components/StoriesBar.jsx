@@ -66,8 +66,6 @@ const StoriesBar = () => {
                                 </div>
                             )
                         }
-                       
-
                     </div>
                 ))
             }
