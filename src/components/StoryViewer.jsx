@@ -59,9 +59,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
         <div className='absolute top-0 left-0 w-full h-1 bg-gray-700'>
             <div className='h-full bg-white transition-all duration-100 linear' style=
             {{width: `${progress}%`}}>
-
             </div>
-
         </div>
         {/* user info topleft*/}
         <div className='absolute top-4 left-4 flex items-center space-x-3 p-2 px-4
