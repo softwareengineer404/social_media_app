@@ -116,5 +116,4 @@ const ProfileModal = ({setShowEdit}) => {
     </div>
   )
 }
-
 export default ProfileModal
