@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Loading = ({height = '100vh'}) => {
   return (
     <div style={{height}} className='flex items-center justify-center h-screen'>
@@ -7,6 +6,5 @@ const Loading = ({height = '100vh'}) => {
        border-purple-500 border-t-transparent animate-spin'></div> 
     </div>
   )
-}
-
+} 
 export default Loading
