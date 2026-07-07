@@ -41,5 +41,4 @@ const RecentMessages = () => {
     </div>
   )
 }
-
 export default RecentMessages
