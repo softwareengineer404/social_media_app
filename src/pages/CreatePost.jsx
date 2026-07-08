@@ -8,7 +8,6 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false)
   const user = dummyUserData;
 const handleSubmit = async () => {
-
 }
   return (
     <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white'>
@@ -79,5 +78,4 @@ const handleSubmit = async () => {
     </div>
   )
 }
-
 export default CreatePost
