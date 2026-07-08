@@ -121,5 +121,4 @@ const connections = () => {
     </div>
   )
 }
-
 export default connections
