@@ -36,12 +36,10 @@ const Feed = () => {
           <p className='text-slate-600'>Email marketing</p>
           <p className='text-slate-400'>Supercharge Your marketing with a powerful,
             easy-to-use platform built for results.</p>
-          
         </div>
         <RecentMessages />
       </div>
     </div>
   ) : <Loading />
 }
-
 export default Feed
