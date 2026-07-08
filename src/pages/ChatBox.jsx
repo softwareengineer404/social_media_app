@@ -73,11 +73,9 @@ const ChatBox = () => {
           active:scale-95 cursor-pointer text-white p-2 rounded-full'>
             <SendHorizonal size={18}/>
           </button>
-
         </div>
       </div>
     </div>
   )
 }
-
 export default ChatBox
