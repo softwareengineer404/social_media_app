@@ -15,7 +15,6 @@ const Layout = () => {
       <div className='flex-1 bg-slate-50'>
         <Outlet />
       </div>
-
       {
         sidebarOpen ? 
           <X className='absolute top-3 right-3 p-2 z-100 bg-white rounded-md shadow
@@ -31,5 +30,4 @@ const Layout = () => {
     <Loading />
   )
 }
-
 export default Layout
