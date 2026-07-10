@@ -47,7 +47,6 @@ const messages = () => {
           ))}
         </div>
    
-          
       </div>
     </div>
   )
