@@ -51,5 +51,4 @@ const messages = () => {
     </div>
   )
 }
-
 export default messages
