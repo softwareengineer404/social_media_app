@@ -33,5 +33,4 @@ const App = () => {
     </>
   )
 }
-
 export default App    //Makes this component available for other files to use. main.jsx or other files can import and display it.
