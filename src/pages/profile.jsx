@@ -43,7 +43,6 @@ const profile = () => {
               "text-gray-600 hover:text-gray-900"
               }`}>
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
-
               </button>
             ))}
           </div>
