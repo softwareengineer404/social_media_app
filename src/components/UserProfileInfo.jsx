@@ -65,5 +65,4 @@ const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
     </div>
   )
 }
-
 export default UserProfileInfo
