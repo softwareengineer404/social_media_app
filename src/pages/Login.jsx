@@ -35,7 +35,6 @@ const Login = () => {
       <div className='flex-1 flex items-center justify-center p-6 sm:p-10'>
         <SignIn />
       </div>
-      
     </div>
   )
 }
