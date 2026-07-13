@@ -49,7 +49,6 @@ const connections = () => {
               }`}
             >
               <tab.icon className='w-4 h-4' />
-
               <span className='ml-1'>
                 {tab.label}
               </span>
