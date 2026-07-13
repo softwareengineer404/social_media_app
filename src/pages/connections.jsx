@@ -53,7 +53,6 @@ const connections = () => {
               <span className='ml-1'>
                 {tab.label}
               </span>
-
               {tab.count !== undefined && (
                 <span className='ml-2 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full'>
                   {tab.count}
