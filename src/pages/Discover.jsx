@@ -36,7 +36,6 @@ const Discover = () => {
             or location...' className='pl-10 sm:pl-12 py-2 w-full border
             border-gray-300 rounded-md max-sm:text-sm' onChange={(e)=>setInput(e.
             target.value)} value={input} onKeyUp={handleSearch}/>
-
           </div>
         </div>
       </div>
