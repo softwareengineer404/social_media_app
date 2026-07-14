@@ -44,7 +44,6 @@ const handleSubmit = async () => {
                   justify-center items-center top-0 right-0 bottom-0 left-0
                   bg-black/40 rounded-md cursor-pointer'>
                     <X className="w-6 h-6 text-white"/>
-
                   </div>
                 </div>
               ))}
