@@ -29,7 +29,7 @@ const profile = () => {
             {user.cover_photo && <img src={user.cover_photo} alt=''
             className='w-full h-full object-cover'/>}
           </div>
-          {/* user info */}
+          {/* User Info */}
           <UserProfileInfo user={user} posts={posts} profileId={profileId}
           setShowEdit={setShowEdit}/>
         </div>
