@@ -27,7 +27,7 @@ const Feed = () => {
           ))}
         </div>
       </div>
-      {/* right side bar */}
+      {/* Right Side Bar */}
       <div className='max-xl:hidden sticky top-0'>
         <div className='max-w-xs bg-white text-xs p-4 rounded-md inline-flex
         flex-col gap-2 shadow'>
