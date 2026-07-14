@@ -23,7 +23,7 @@ const profile = () => {
       <div className='max-w-3xl mx-auto'>
         {/* profile card */}
         <div className='bg-white rounded-2xl shadow overflow-hidden'>
-          {/* cover photo */}
+          {/* Cover Photo */}
           <div className='h-4 md:h-56 bg-gradient-to-r from-indigo-200
           via-purple-200 to-pink-200'>
             {user.cover_photo && <img src={user.cover_photo} alt=''
