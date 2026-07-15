@@ -24,7 +24,6 @@ const messages = () => {
                 alt=""
                 className='rounded-full size-12 mx-auto'
               />
-
               <div className='flex-1'>
                 {/* Content goes here */}
                 <p className='font-medium text-slate-700'>{user.full_name}</p>
