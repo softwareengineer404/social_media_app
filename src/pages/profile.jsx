@@ -21,7 +21,7 @@ const profile = () => {
   return user ? (
     <div className='relative h-full overflow-y-scroll bg-gray-50 p-6'>
       <div className='max-w-3xl mx-auto'>
-        {/* profile card */}
+        {/* Profile Card */}
         <div className='bg-white rounded-2xl shadow overflow-hidden'>
           {/* Cover Photo */}
           <div className='h-4 md:h-56 bg-gradient-to-r from-indigo-200
