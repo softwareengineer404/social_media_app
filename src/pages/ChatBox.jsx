@@ -8,7 +8,6 @@ const ChatBox = () => {
   const [user, setUser] = useState(dummyUserData)
   const messagesEndRef = useRef(null)
   const sendMessage = async () => {
-
   }
   useEffect(()=>{
     messagesEndRef.current?.scrollIntoView({behavior: "smooth" })
