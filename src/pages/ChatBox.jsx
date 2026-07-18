@@ -63,7 +63,6 @@ const ChatBox = () => {
             }
             <input type="file" id='image' accept="image/*" hidden onChange={(e)
             =>setImage(e.target.files[0])}/>
-            
           </label>
           <button onClick={sendMessage} className='bg-gradient-to-br
           from-indigo-500 to-purple-600 hover:from-indigo-700 hover:to-purple-800
