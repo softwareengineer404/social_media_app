@@ -21,7 +21,7 @@ const Login = () => {
                 className='size-4 md:size-4.5 text-transparent
                 fill-amber-500'/>))}
               </div>
-              <p>Used by 13k+ developers</p>
+              <p>Used by 14k+ developers</p>
             </div>
           </div>
           <h1 className='text-3xl md:text-6xl md:pb-2 font-bold bg-gradient-to-r
