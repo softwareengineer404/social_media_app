@@ -31,7 +31,6 @@ const ChatBox = () => {
             createdAt)).map((message, index)=>(
               <div key={index} className={`flex flex-col ${message.to_user_id !== 
               user._id ? 'items-start' : 'items-end'}`}>
-              
                 <div className={`p-2 text-sm max-w-sm bg-white text-slate-700
                 rounded-lg shadow ${message.to_user_id !== user._id ?
                 'rounded-bl-none' : 'rounded-br-none'}`}>
