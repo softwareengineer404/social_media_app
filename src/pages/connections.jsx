@@ -115,7 +115,6 @@ const connections = () => {
           ))}
         </div>
       </div>
-      
     </div>
   )
 }
