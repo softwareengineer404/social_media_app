@@ -12,7 +12,7 @@ const messages = () => {
           <h1 className='text-3xl font-bold text-slate-900 mb-2'>Messages</h1>
           <p className='text-slate-600'>Talk To Your Friends and Family, people</p>
         </div>
-        {/* Connected users*/}
+        {/* connected users*/}
         <div className='flex flex-col gap-3'>
           {dummyConnectionsData.map((user) => (
             <div
