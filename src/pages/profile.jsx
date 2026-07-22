@@ -80,4 +80,5 @@ const profile = () => {
     </div>
   ) : (<Loading />)
 }
+
 export default profile
