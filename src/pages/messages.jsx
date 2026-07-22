@@ -46,8 +46,9 @@ const messages = () => {
           ))}
         </div>
       </div>
-      
+
     </div>
   )
 }
+
 export default messages
