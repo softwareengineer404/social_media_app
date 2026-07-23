@@ -26,4 +26,5 @@ const Layout = () => {
     <Loading />
   )
 }
+
 export default Layout
