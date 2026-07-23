@@ -5,6 +5,7 @@ import StoriesBar from '../components/StoriesBar'
 import { dummyPostData } from '../assets/assets'
 import PostCard from '../components/PostCard'
 import RecentMessages from '../components/RecentMessages'
+
 const Feed = () => {
   const [feeds, setFeeds] = useState([]) //feeds store post data,  setfeeds update the value of feeds
   const [loading, setLoading] = useState(true)
