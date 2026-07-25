@@ -19,4 +19,5 @@ const MenuItems = ({setSidebarOpen}) => {
     </div>
   )
 }
+
 export default MenuItems
