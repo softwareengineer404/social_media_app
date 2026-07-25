@@ -61,7 +61,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
             {{width: `${progress}%`}}>
             </div>
         </div>
-        {/* user info topleft*/}
+        {/* user info top left*/}
         <div className='absolute top-4 left-4 flex items-center space-x-3 p-2 px-4
         sm:p-4 sm:px-8 backdrop-blur-2xl rounded bg-black/50'>
             <img src={viewStory.user?.profile_picture} alt="" className='ize-7
