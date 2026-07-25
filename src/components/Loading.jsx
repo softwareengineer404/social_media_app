@@ -7,4 +7,5 @@ const Loading = ({height = '100vh'}) => {
     </div>
   )
 } 
+
 export default Loading
