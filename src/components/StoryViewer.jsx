@@ -83,5 +83,4 @@ const StoryViewer = ({viewStory, setViewStory}) => {
     </div>
   )
 }
-
 export default StoryViewer
