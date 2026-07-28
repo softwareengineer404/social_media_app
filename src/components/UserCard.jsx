@@ -55,6 +55,7 @@ const UserCard = ({user}) => {
                 }
             </button>
         </div>
+        
     </div>
   )
 }
