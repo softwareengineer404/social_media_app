@@ -24,7 +24,6 @@ const UserCard = ({user}) => {
             <div className='flex items-center gap-1 border border-gray-300
             rounded-full px-3 py-1'>
                 <MapPin className='w-4 h-4'/> (user.location)
-
             </div>
             <div className='flex items-center gap-1 border border-gray-300
             rounded-full px-3 py-1'>
@@ -55,7 +54,7 @@ const UserCard = ({user}) => {
                 }
             </button>
         </div>
-        
+
     </div>
   )
 }
