@@ -69,7 +69,6 @@ const StoryViewer = ({viewStory, setViewStory}) => {
             <div className='text-white font-medium flex items-center gap-1.5'>
                 <span>{viewStory.user?.full_name}</span>
                 <BadgeCheck size={18}/>
-
             </div>
         </div>
         {/* close button */}
