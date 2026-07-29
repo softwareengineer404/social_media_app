@@ -31,7 +31,7 @@ const UserCard = ({user}) => {
             </div>
         </div>
         <div className='flex mt-4 gap-2'>
-            
+
             {/* Follow Button */}
             <button onClick={handleFollow} disabled={currentUser?.following.includes
             (user._id)} className='w-full py-2 rounded-md flex justify-center
@@ -58,4 +58,5 @@ const UserCard = ({user}) => {
     </div>
   )
 }
+
 export default UserCard
