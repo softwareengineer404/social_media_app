@@ -31,6 +31,7 @@ const UserCard = ({user}) => {
             </div>
         </div>
         <div className='flex mt-4 gap-2'>
+            
             {/* Follow Button */}
             <button onClick={handleFollow} disabled={currentUser?.following.includes
             (user._id)} className='w-full py-2 rounded-md flex justify-center
@@ -40,7 +41,7 @@ const UserCard = ({user}) => {
                 <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
                 (user._id) ? 'Following' : 'Follow'}
             </button>
-            
+
             {/* Connections request button / message button */}
             <button onClick={handleConnectionRequest} className='flex items-center
             justify-center w-16 border text-slate-500 group rounded-md
