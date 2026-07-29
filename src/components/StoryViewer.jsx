@@ -71,6 +71,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
                 <BadgeCheck size={18}/>
             </div>
         </div>
+        
         {/* close button */}
         <button onClick={handleClose} className='absolute top-4 right-4 text-white text-3xl
         font-bold focus:outline-none'>
