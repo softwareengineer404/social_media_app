@@ -40,8 +40,8 @@ const UserCard = ({user}) => {
             text-white cursor-pointer'>
                 <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
                 (user._id) ? 'Following' : 'Follow'}
-            </button>
 
+            </button>
             {/* Connections request button / message button */}
             <button onClick={handleConnectionRequest} className='flex items-center
             justify-center w-16 border text-slate-500 group rounded-md
@@ -54,6 +54,7 @@ const UserCard = ({user}) => {
                     <Plus className='w-5 h-5 group-hover:scale-105 transition'/>
                 }
             </button>
+            
         </div>
     </div>
   )
