@@ -32,7 +32,6 @@ const StoriesBar = () => {
                     <p className='text-sm font-medium text-slate-700
                     text-center'>Create Story</p>
                 </div>
-
             </div>
             {/* story cards */}
             {
