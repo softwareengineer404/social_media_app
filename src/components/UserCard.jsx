@@ -30,6 +30,7 @@ const UserCard = ({user}) => {
                 <span>{user.followers.length}</span> Followers
             </div>
         </div>
+        
         <div className='flex mt-4 gap-2'>
 
             {/* Follow Button */}
@@ -54,7 +55,7 @@ const UserCard = ({user}) => {
                     <Plus className='w-5 h-5 group-hover:scale-105 transition'/>
                 }
             </button>
-            
+
         </div>
     </div>
   )
