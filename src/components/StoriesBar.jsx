@@ -79,5 +79,4 @@ const StoriesBar = () => {
     </div>
   )
 }
-
 export default StoriesBar
