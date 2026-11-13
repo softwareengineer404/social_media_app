@@ -6,7 +6,7 @@ import {
   dummyFollowersData as followers,
   dummyFollowingData as following,
   dummyPendingConnectionsData as pendingConnections
-} from '../assets/assets'
+} from '../assets/downloadedAssets'
 const connections = () => {
   const [currentTab, setCurrentTab] = useState('Followers')
   const navigate = useNavigate()

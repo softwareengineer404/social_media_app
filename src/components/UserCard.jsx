@@ -1,5 +1,5 @@
 import React from 'react'
-import { dummyUserData } from '../assets/assets'
+import { dummyUserData } from '../assets/downloadedAssets'
 import { MessageCircle, MapPin, Plus } from 'lucide-react'
 const UserCard = ({user}) => {
     const currentUser = dummyUserData

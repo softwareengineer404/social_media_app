@@ -1,5 +1,5 @@
 import React from 'react'
-import { assets } from '../assets/assets'
+import { assets } from '../assets/downloadedAssets'
 import { Star } from 'lucide-react'
 import {SignIn } from '@clerk/clerk-react'
 const Login = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { dummyUserData } from '../assets/assets'
+import { dummyUserData } from '../assets/downloadedAssets'
 import { Pencil } from 'lucide-react';
 const ProfileModal = ({setShowEdit}) => {
     const user = dummyUserData;

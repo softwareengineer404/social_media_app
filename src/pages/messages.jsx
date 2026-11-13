@@ -1,5 +1,5 @@
 import React from 'react'
-import { dummyConnectionsData } from '../assets/assets'
+import { dummyConnectionsData } from '../assets/downloadedAssets'
 import { Eye, MessageSquare } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 const messages = () => {
