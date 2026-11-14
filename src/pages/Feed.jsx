@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import Loading from '../components/Loading'
 import StoriesBar from '../components/StoriesBar'
-import { dummyPostData } from '../assets/downloadedAssets'
+import { dummyPostData } from '../assets/assets'
 import PostCard from '../components/PostCard'
 import RecentMessages from '../components/RecentMessages'
 
