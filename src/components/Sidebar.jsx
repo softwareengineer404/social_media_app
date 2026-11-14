@@ -1,5 +1,5 @@
 import React from 'react'
-import { assets, dummyUserData } from '../assets/downloadedAssets'
+import { assets, dummyUserData } from '../assets/assets'
 import MenuItems from './MenuItems'
 import { CirclePlus, LogOut } from 'lucide-react' //Purpose: Imports the plus-circle icon from the icon library
 import { Link, useNavigate } from 'react-router-dom' //Imports navigation tools for moving between pages.
