@@ -36,7 +36,6 @@ const RecentMessages = () => {
                     </Link>
                 ))
             }
-
         </div>
     </div>
   )
