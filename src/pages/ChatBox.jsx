@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { dummyMessagesData, dummyUserData } from '../assets/downloadedAssets'
+import { dummyMessagesData, dummyUserData } from '../assets/assets'
 import { ImageIcon, SendHorizonal } from 'lucide-react'
 const ChatBox = () => {
   const messages = dummyMessagesData
