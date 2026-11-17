@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { dummyPostsData, dummyUserData } from '../assets/downloadedAssets'
+import { dummyPostsData, dummyUserData } from '../assets/assets'
 import { useEffect } from 'react'
 import UserProfileInfo from '../components/UserProfileInfo'
 import ProfileModal from '../components/ProfileModal'
