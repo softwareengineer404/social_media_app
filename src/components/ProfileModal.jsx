@@ -100,7 +100,7 @@ const ProfileModal = ({setShowEdit}) => {
         
                 </div>
                 <div className='flex justify-end space-x-3 pt-6'>
-                    <button onClick={()=> setShowEdit(false)} type='button
+                    <button onClick={()=> setShowEdit(false)} type='button'
                     className='px-4 py-2 border border-gray-300 rounded-lg
                     text-gray-700 hover:bg-gray-50 transition-colors 
                     cursor-pointer'>cancel</button>
