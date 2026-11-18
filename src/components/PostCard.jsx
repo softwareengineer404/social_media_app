@@ -1,7 +1,7 @@
 import React, { useState }from 'react'
 import { BadgeCheck, Heart, MessageCircle, Share2 } from 'lucide-react'
 import moment from 'moment'
-import { dummyUserData } from '..assets/assets'
+import { dummyUserData } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 const PostCard = ({post}) => {
     const postWithHashtags = post.content.replace(/(#\w+)/g, '<span class="text-indigo-600">$1</span>')
