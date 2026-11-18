@@ -2,7 +2,7 @@ import React, { useEffect, useState}from 'react'
 import { dummyStoriesData } from '../assets/assets'
 import { Plus } from 'lucide-react'
 import moment from 'moment'
-import StoryModal from './StoryModel'
+import StoryModal from './StoryModal'
 import StoryViewer  from './StoryViewer'
 const StoriesBar = () => {
     const [stories, setStories] = useState([])
