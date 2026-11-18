@@ -69,8 +69,7 @@ const ProfileModal = ({setShowEdit}) => {
                         Name
                     </label>
                         <input type="text" className='w-full p-3 border border-gray-200
-                        rounded-lg' placeholder='please enter your full name' onChange={(e)
-                        =>setEditForm({...editForm, full_name: e.target.value})} value={editForm.full_name}/>
+                        rounded-lg' placeholder='please enter your full name' onChange={(e)=> setEditForm({...editForm, full_name: e.target.value})} value={editForm.full_name}/>
                      
                 </div>
                 <div>
