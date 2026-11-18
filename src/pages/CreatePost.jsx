@@ -47,7 +47,7 @@ const handleSubmit = async () => {
                   </div>
                 </div>
               ))}
-            <div/>
+            </div>
           }
             {/* Bottom Bar */} 
             <div className='flex items-center justify-between pt-3 border-t
@@ -56,7 +56,7 @@ const handleSubmit = async () => {
               text-gray-500 hover:text-gray-700 transition cursor-pointer'>
                 <Image className='size-6'/>
               </label>
-              <input type="file" id="images" accepts='image/*' hidden multiple
+              <input type="file" id="images" accept='image/*' hidden multiple
               onChange={(e)=>setImages([...images, ...e.target.files])}/>
               <button disabled ={loading} onClick={()=> toast.promise(
                 handleSubmit(),
@@ -66,7 +66,7 @@ const handleSubmit = async () => {
                   error: <p>Post Not Added</p>
                 }
               )}className='text-sm bg-gradient-to-r from-indigo-500
-              t0-purple-600 hover:from-indigo-600 hover:to-purple-700
+              to-purple-600 hover:from-indigo-600 hover:to-purple-700
               active:scale-95 transition text-white font-medium px-8 py-2
               rounded-md cursor-pointer'>
                 Publish Post
