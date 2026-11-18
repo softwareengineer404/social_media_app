@@ -31,7 +31,7 @@ const StoryModal = ({setShowModal, fetchStories}) => {
             relative' style={{backgroundColor: background}}>
                 {mode === 'text' && (
                     <textarea className='bg-transparent text-white w-full h-full
-                    p-6 text-lg resize-none focus:outline-none' placeholder="what is on your mind?" onChange={{e}=>setText(e.target.value)} value={text}/>
+                    p-6 text-lg resize-none focus:outline-none' placeholder="what is on your mind?" onChange={(e)=>setText(e.target.value)} value={text}/>
                 )}
                 {
                    mode === 'media' && previewUrl && (
