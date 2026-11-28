@@ -1,13 +1,34 @@
 import React, { useState } from 'react'
-import { dummyUserData } from '../assets/downloadedAssets'
+import { useNavigate } from 'react-router-dom'
+import { dummyPostData, dummyUserData } from '../assets/assets'
 import { X, Image } from 'lucide-react'
 import toast from 'react-hot-toast'
 const CreatePost = () => {
+  const navigate = useNavigate()
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])
   const [loading, setLoading] = useState(false)
   const user = dummyUserData;
 const handleSubmit = async () => {
+  if (!content.trim() && images.length === 0) {
+    throw new Error('Write something or add an image')
+  }
+  setLoading(true)
+  try {
+    dummyPostData.unshift({
+      _id: 'post_' + Date.now(),
+      content,
+      createdAt: new Date().toISOString(),
+      likes_count: [],
+      image_urls: images.map((image) => URL.createObjectURL(image)),
+      user,
+    })
+    setContent('')
+    setImages([])
+    navigate('/')
+  } finally {
+    setLoading(false)
+  }
 }
   return (
     <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white'>
@@ -47,7 +68,7 @@ const handleSubmit = async () => {
                   </div>
                 </div>
               ))}
-            <div/>
+            </div>
           }
             {/* Bottom Bar */} 
             <div className='flex items-center justify-between pt-3 border-t
@@ -56,7 +77,7 @@ const handleSubmit = async () => {
               text-gray-500 hover:text-gray-700 transition cursor-pointer'>
                 <Image className='size-6'/>
               </label>
-              <input type="file" id="images" accepts='image/*' hidden multiple
+              <input type="file" id="images" accept='image/*' hidden multiple
               onChange={(e)=>setImages([...images, ...e.target.files])}/>
               <button disabled ={loading} onClick={()=> toast.promise(
                 handleSubmit(),
@@ -66,7 +87,7 @@ const handleSubmit = async () => {
                   error: <p>Post Not Added</p>
                 }
               )}className='text-sm bg-gradient-to-r from-indigo-500
-              t0-purple-600 hover:from-indigo-600 hover:to-purple-700
+              to-purple-600 hover:from-indigo-600 hover:to-purple-700
               active:scale-95 transition text-white font-medium px-8 py-2
               rounded-md cursor-pointer'>
                 Publish Post

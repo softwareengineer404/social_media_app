@@ -4,9 +4,9 @@ import { Star } from 'lucide-react'
 import {SignIn } from '@clerk/clerk-react'
 const Login = () => {
   return (
-    <div className='min-h-screen flex flex-col md:flex-row'>
+    <div className='relative min-h-screen flex flex-col md:flex-row'>
       {/* Background Image */}
-      <img src={assets.bgImage} alt="" className='absolute top-0 left-0 -z-1 w-full
+      <img src={assets.bgImage} alt="" className='absolute top-0 left-0 -z-10 w-full
       h-full object-cover'/>
       {/* Left Side : Branding */}
       <div className='flex-1 flex flex-col items-start justify-between p-6 md:p-10
@@ -33,7 +33,7 @@ const Login = () => {
       </div>
       {/* Right Side: Login form */}
       <div className='flex-1 flex items-center justify-center p-6 sm:p-10'>
-        <SignIn />
+        <SignIn fallbackRedirectUrl='/' signUpFallbackRedirectUrl='/' />
       </div>
     </div>
   )

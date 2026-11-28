@@ -6,6 +6,8 @@ import group_users from './group_users.png'
 import { Home, MessageCircle, Search, UserIcon, Users } from 'lucide-react'
 import sponsored_img from './sponsored_img.png'
 
+export const sampleProfileImage = sample_profile
+
 export const assets = {
     logo,
     sample_cover,
@@ -28,6 +30,7 @@ export const dummyUserData = {
     "email": "admin@example.com",
     "full_name": "John Warren",
     "username": "john_warren",
+    "user_name": "john_warren",
     "bio": "🌍 Dreamer | 📚 Learner | 🚀 Doer\r\nExploring life one step at a time.\r\n✨ Staying curious. Creating with purpose.",
     "profile_picture": sample_profile,
     "cover_photo": sample_cover,
@@ -44,7 +47,8 @@ export const dummyUserData = {
 const dummyUser2Data = {
     ...dummyUserData,
     _id: "user_2",
-    username: "Richard Hendricks",
+    username: "richard_hendricks",
+    user_name: "richard_hendricks",
     full_name: "Richard Hendricks",
     profile_picture: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
 }
@@ -53,7 +57,8 @@ const dummyUser3Data = {
     ...dummyUserData,
     _id: "user_3",
     username: "alexa_james",
-    full_name: "Alexa james",
+    user_name: "alexa_james",
+    full_name: "Alexa James",
     profile_picture: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop",
 }
 
@@ -119,7 +124,6 @@ export const dummyStoriesData = [
         "updatedAt": "2025-07-25T08:13:18.111Z",
     }
 ]
-
 
 export const dummyPostsData = [
     {
@@ -192,6 +196,8 @@ export const dummyPostsData = [
     }
 ]
 
+export const dummyPostData = dummyPostsData
+
 export const dummyRecentMessagesData = [
     {
         "_id": "68833af618623d2de81b5381",
@@ -231,7 +237,7 @@ export const dummyRecentMessagesData = [
 export const dummyMessagesData = [
     {
         "_id": "6878cc3217a54e4d37480122",
-        "from_user_id": "user_2zwZSCMRXQ9GaEEVLgm6akQo96i",
+        "from_user_id": "user_2",
         "to_user_id": "user_2zdFoZib5lNr614LgkONdD8WG32",
         "text": "",
         "message_type": "image",
@@ -242,7 +248,7 @@ export const dummyMessagesData = [
     },
     {
         "_id": "6878cc3c17a54e4d3748012f",
-        "from_user_id": "user_2zwZSCMRXQ9GaEEVLgm6akQo96i",
+        "from_user_id": "user_2",
         "to_user_id": "user_2zdFoZib5lNr614LgkONdD8WG32",
         "text": "This is a Samsung Tablet",
         "message_type": "text",
@@ -254,7 +260,7 @@ export const dummyMessagesData = [
     {
         "_id": "68835ffc6e4b42b685069def",
         "from_user_id": "user_2zdFoZib5lNr614LgkONdD8WG32",
-        "to_user_id": "user_2zwZSCMRXQ9GaEEVLgm6akQo96i",
+        "to_user_id": "user_2",
         "text": "yah , this tablet is good",
         "message_type": "text",
         "media_url": "",
@@ -262,10 +268,10 @@ export const dummyMessagesData = [
         "createdAt": "2025-07-25T10:44:12.753Z",
         "updatedAt": "2025-07-25T10:44:12.753Z",
     },
-        {
+    {
         "_id": "6878cc2817a54e4d3748010c",
         "from_user_id": "user_2zdFoZib5lNr614LgkONdD8WG32",
-        "to_user_id": "user_2zwZSCMRXQ9GaEEVLgm6akQo96i",
+        "to_user_id": "user_2",
         "text": "you can purchase it from amazon",
         "message_type": "text",
         "media_url": "",
@@ -273,6 +279,17 @@ export const dummyMessagesData = [
         "updatedAt": "2025-08-25T10:43:50.346Z",
         "seen": true
     },
+    {
+        "_id": "686fb66c7f0dcbff63b239e8",
+        "from_user_id": "user_3",
+        "to_user_id": "user_2zdFoZib5lNr614LgkONdD8WG32",
+        "text": "how are you",
+        "message_type": "text",
+        "media_url": "",
+        "createdAt": "2025-07-10T12:47:40.510Z",
+        "updatedAt": "2025-07-10T12:47:40.510Z",
+        "seen": false
+    }
 ]
 
 export const dummyConnectionsData = [
@@ -294,3 +311,14 @@ export const dummyFollowingData = [
 export const dummyPendingConnectionsData = [
     dummyUserData
 ]
+
+export const getUserById = (id) => {
+    if (!id || id === dummyUserData._id) return dummyUserData
+    return (
+        dummyConnectionsData.find((user) => user._id === id) ||
+        dummyFollowersData.find((user) => user._id === id) ||
+        dummyFollowingData.find((user) => user._id === id) ||
+        dummyPendingConnectionsData.find((user) => user._id === id) ||
+        dummyUserData
+    )
+}

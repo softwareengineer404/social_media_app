@@ -22,7 +22,7 @@ const StoryViewer = ({viewStory, setViewStory}) => {
             clearTimeout(timer);
             clearInterval(progressInterval)
         }
-    }, {viewStory, setViewStory})
+    }, [viewStory, setViewStory])
     const handleClose = ()=>{
         setViewStory(null)
     }
@@ -36,8 +36,8 @@ const StoryViewer = ({viewStory, setViewStory}) => {
                 );
             case 'video':
                 return (
-                    <video onEnded={()=>setViewStory(nul)} src={viewStory.media_url}
-                    className='max-h-screen' controls autoplay/>
+                    <video onEnded={()=>setViewStory(null)} src={viewStory.media_url}
+                    className='max-h-screen' controls autoPlay/>
                 );
             case 'text':
                 return (
@@ -51,9 +51,9 @@ const StoryViewer = ({viewStory, setViewStory}) => {
         }
     }
   return (
-    <div className='fixed inset-0 h-screen bg-black bg-opacity-90 z-110 flex
+    <div className='fixed inset-0 h-screen bg-black/90 z-110 flex
     items-center justify-center' style={{backgroundColor: viewStory.media_type ===
-    'text' ? viewStory.background-color : '#000000'
+    'text' ? (viewStory.background || viewStory.background_color || '#4f46e5') : '#000000'
     }}>
         {/* progress bar */}
         <div className='absolute top-0 left-0 w-full h-1 bg-gray-700'>
@@ -61,17 +61,17 @@ const StoryViewer = ({viewStory, setViewStory}) => {
             {{width: `${progress}%`}}>
             </div>
         </div>
-        {/* user info top left*/}
+        {/* user info topleft*/}
         <div className='absolute top-4 left-4 flex items-center space-x-3 p-2 px-4
         sm:p-4 sm:px-8 backdrop-blur-2xl rounded bg-black/50'>
-            <img src={viewStory.user?.profile_picture} alt="" className='ize-7
+            <img src={viewStory.user?.profile_picture} alt="" className='size-7
             sm:size-8 rounded-full object-cover border border-white'/>
             <div className='text-white font-medium flex items-center gap-1.5'>
                 <span>{viewStory.user?.full_name}</span>
                 <BadgeCheck size={18}/>
+
             </div>
         </div>
-        
         {/* close button */}
         <button onClick={handleClose} className='absolute top-4 right-4 text-white text-3xl
         font-bold focus:outline-none'>
@@ -84,4 +84,5 @@ const StoryViewer = ({viewStory, setViewStory}) => {
     </div>
   )
 }
+
 export default StoryViewer

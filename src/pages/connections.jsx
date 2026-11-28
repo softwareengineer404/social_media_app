@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Users, UserPlus, UserCheck, UserRoundPen, MessageSquare} from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import {
-  dummyConnectionsData as connections,
-  dummyFollowersData as followers,
-  dummyFollowingData as following,
-  dummyPendingConnectionsData as pendingConnections
-} from '../assets/downloadedAssets'
-const connections = () => {
+  dummyConnectionsData as connectionsData,
+  dummyFollowersData as followersData,
+  dummyFollowingData as followingData,
+  dummyPendingConnectionsData as pendingConnectionsData
+} from '../assets/assets'
+const Connections = () => {
   const [currentTab, setCurrentTab] = useState('Followers')
+  const [followers] = useState(followersData)
+  const [following, setFollowing] = useState(followingData)
+  const [pendingConnections, setPendingConnections] = useState(pendingConnectionsData)
+  const [connectionsList, setConnectionsList] = useState(connectionsData)
   const navigate = useNavigate()
   const dataArray = [
-    {label: 'Follwers', value: followers, icon: Users },
-    {label: 'Follwing', value: following, icon: UserCheck },
+    {label: 'Followers', value: followers, icon: Users },
+    {label: 'Following', value: following, icon: UserCheck },
     {label: 'Pending', value: pendingConnections, icon: UserRoundPen },
-    {label: 'Connections', value: connections, icon: UserPlus },
+    {label: 'Connections', value: connectionsList, icon: UserPlus },
   ]
+  const activeItems = dataArray.find((item) => item.label === currentTab)?.value || []
   return (
     <div className='min-h-screen bg-slate-50'>
       <div className='max-w-6xl mx-auto p-6'>
@@ -35,43 +40,48 @@ const connections = () => {
         ))}
       </div>
       {/* Tabs */}
-      <div className='inline-flex flex flex-wrap items-center border border-gray-200
+      <div className='inline-flex flex-wrap items-center border border-gray-200
       rounded-md p-1 bg-white shadow-sm'>
         {
-          dataArray.map((tab) => (
-            <button onClick={()=> setCurrentTab(tab.label)}
-              key={tab.label}
-              className={`cursor-pointer flex items-center px-3 py-1 text-sm
-              rounded-md transition-colors ${
-                currentTab === tab.label
-                  ? 'bg-white font-medium text-black'
-                  : 'text-gray-500 hover:text-black'
-              }`}
-            >
-              <tab.icon className='w-4 h-4' />
-              <span className='ml-1'>
-                {tab.label}
-              </span>
-              {tab.count !== undefined && (
-                <span className='ml-2 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full'>
-                  {tab.count}
+          dataArray.map((tab) => {
+            const TabIcon = tab.icon
+            return (
+              <button onClick={()=> setCurrentTab(tab.label)}
+                key={tab.label}
+                className={`cursor-pointer flex items-center px-3 py-1 text-sm
+                rounded-md transition-colors ${
+                  currentTab === tab.label
+                    ? 'bg-slate-100 font-medium text-black'
+                    : 'text-gray-500 hover:text-black'
+                }`}
+              >
+                <TabIcon className='w-4 h-4' />
+                <span className='ml-1'>
+                  {tab.label}
                 </span>
-              )}
-            </button>
-          ))
+                {tab.count !== undefined && (
+                  <span className='ml-2 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full'>
+                    {tab.count}
+                  </span>
+                )}
+              </button>
+            )
+          })
         }
       </div>
       {/* Connections */}
-        <div>
-          {dataArray.find((item)=>item.label === currentTab).value.map((user)=>(
+        <div className='flex flex-wrap gap-6 mt-6'>
+          {activeItems.length === 0 ? (
+            <p className='text-sm text-slate-500'>No users in {currentTab.toLowerCase()} yet.</p>
+          ) : activeItems.map((user)=>(
             <div key={user._id} className='w-full max-w-88 flex gap-5 p-6 bg-white
             shadow rounded-md'>
-              <img src={user.profile_picture} alt="" ClassName="rounded-full w-12
-              h-12 shadow-md mx-auto"/>
-              <div className='flex-1'>
+              <img src={user.profile_picture} alt="" className="rounded-full w-12
+              h-12 shadow-md shrink-0 object-cover"/>
+              <div className='flex-1 min-w-0'>
                 <p className="font-medium text-slate-700">{user.full_name}</p>
-                <p className="text-slate-500">@{user.user_name}</p>
-                <p className="text-sm text-gray-600">{user.bio.slice(0, 30)}...</p>
+                <p className="text-slate-500">@{user.user_name || user.username}</p>
+                <p className="text-sm text-gray-600">{(user.bio || '').slice(0, 30)}...</p>
                 <div className='flex max-sm:flex-col gap-2 mt-4'>
                   {
                     <button onClick={()=> navigate(`/profile/${user._id}`)}
@@ -83,7 +93,7 @@ const connections = () => {
                   }
                   {
                     currentTab === 'Following' && (
-                      <button className='w-full p-2 text-sm rounded bg-slate-100
+                      <button onClick={() => setFollowing((prev) => prev.filter((person) => person._id !== user._id))} className='w-full p-2 text-sm rounded bg-slate-100
                       hover:bg-slate-200 text-black active:scale-95 transition
                       cursor-pointer'>
                         Unfollow
@@ -91,8 +101,11 @@ const connections = () => {
                     )
                   }
                   {
-                    currentTab === 'pending' && (
-                      <button className='w-full p-2 text-sm rounded bg-slate-100
+                    currentTab === 'Pending' && (
+                      <button onClick={() => {
+                        setPendingConnections((prev) => prev.filter((person) => person._id !== user._id))
+                        setConnectionsList((prev) => prev.some((person) => person._id === user._id) ? prev : [...prev, user])
+                      }} className='w-full p-2 text-sm rounded bg-slate-100
                       hover:bg-slate-200 text-black active:scale-95 transition
                       cursor-pointer'>
                         Accept
@@ -101,7 +114,7 @@ const connections = () => {
                   }
                   {
                     currentTab === 'Connections' && (
-                      <button onClick={()=> navigate(`/messages/${}`)}className='w-full p-2 text-sm rounded bg-slate-100
+                      <button onClick={()=> navigate(`/messages/${user._id}`)} className='w-full p-2 text-sm rounded bg-slate-100
                       hover:bg-slate-200 text-slate-800 active:scale-95 transition
                       cursor-pointer flex items-center justify-center gap-1'>
                         <MessageSquare className='w-4 h-4'/>
@@ -118,4 +131,4 @@ const connections = () => {
     </div>
   )
 }
-export default connections
+export default Connections

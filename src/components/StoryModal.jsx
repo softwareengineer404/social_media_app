@@ -1,5 +1,7 @@
 import React, {useState }from 'react' //useState → React Hook used to store and update data inside a component
 import { ArrowLeft, TextIcon, Upload, Sparkles } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { dummyStoriesData, dummyUserData } from '../assets/assets'
 const StoryModal = ({setShowModal, fetchStories}) => {
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"]
     const [mode, setMode] = useState("text")
@@ -14,7 +16,25 @@ const StoryModal = ({setShowModal, fetchStories}) => {
             setPreviewUrl(URL.createObjectURL(file))
         }
     }
-    const handleCreateStory = async () => {}
+    const handleCreateStory = async () => {
+        if (mode === 'text' && !text.trim()) {
+            throw new Error('Write something first')
+        }
+        if (mode === 'media' && !media) {
+            throw new Error('Choose a photo or video')
+        }
+        dummyStoriesData.unshift({
+            _id: 'story_' + Date.now(),
+            content: text,
+            media_type: mode === 'text' ? 'text' : (media.type.startsWith('video') ? 'video' : 'image'),
+            media_url: previewUrl || '',
+            background,
+            createdAt: new Date().toISOString(),
+            user: dummyUserData,
+        })
+        await fetchStories()
+        setShowModal(false)
+    }
   return (
     <div className='fixed inset-0 z-110 min-h-screen bg-black/80 backdrop-blur
     text-white flex items-center justify-center p-4'>
@@ -30,8 +50,8 @@ const StoryModal = ({setShowModal, fetchStories}) => {
             <div className='rounded-lg h-96 flex items-center justify-center
             relative' style={{backgroundColor: background}}>
                 {mode === 'text' && (
-                    <textarea className='bg-transparent text-white w-full h-full
-                    p-6 text-lg resize-none focus:outline-none' placeholder="what is on your mind?" onChange={{e}=>setText(e.target.value)} value={text}/>
+                    <textarea className='bg-transparent text-white placeholder:text-white/70 w-full h-full
+                    p-6 text-lg resize-none focus:outline-none' placeholder="What is on your mind?" onChange={(e)=>setText(e.target.value)} value={text}/>
                 )}
                 {
                    mode === 'media' && previewUrl && (
@@ -39,7 +59,7 @@ const StoryModal = ({setShowModal, fetchStories}) => {
                         <img src={previewUrl} alt="" className='object-contain
                         max-h-full'/>
                     ) : (
-                        <video src={previewUrl} className='object-contain
+                        <video src={previewUrl} controls className='object-contain
                         max-h-full'/>
                     )
                    )
@@ -98,7 +118,7 @@ const StoryModal = ({setShowModal, fetchStories}) => {
             py-3 mt-4 w-full rounded bg-gradient-to-r from-indigo-500 to-purple-600
             hover:from-indigo-600 hover:to-purple-700 active:scale-95 transition
             cursor-pointer'>
-                <Sparkle size={18}/> Create Story
+                <Sparkles size={18}/> Create Story
             </button>
         </div>
         

@@ -2,25 +2,23 @@ import React, { useEffect, useState}from 'react'
 import { dummyStoriesData } from '../assets/assets'
 import { Plus } from 'lucide-react'
 import moment from 'moment'
-import StoryModal from './StoryModel'
+import StoryModal from './StoryModal'
 import StoryViewer  from './StoryViewer'
 const StoriesBar = () => {
     const [stories, setStories] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [viewStory, setViewStory] = useState(null)
     const fetchStories = async () => {
-        setStories(dummyStoriesData)
+        setStories([...dummyStoriesData])
     }
     useEffect(()=>{
         fetchStories()
     },[])
   return (
-    <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scrollbar
-    overflow-x-auto px-4'>
-        <div onClick={()=>setShowModal(true)}className='flex gap-4 pb-5'>
+    <div className='w-full max-w-2xl no-scrollbar overflow-x-auto px-4'>
+        <div className='flex gap-4 pb-5'>
             {/* add story card */}
-            <div className='rounded-lg shadow-sm min-w-30 max-h-40 aspect-
-            [3/4] cursor-pointer hover:shadow-lg transition-all duration-200
+            <div onClick={()=>setShowModal(true)} className='rounded-lg shadow-sm min-w-30 h-40 aspect-[3/4] cursor-pointer hover:shadow-lg transition-all duration-200
             border-2 border-dashed border-indigo-300 bg-gradient-to-b
             from-indigo-50 to-white'>
                 <div className='h-full flex flex-col items-center justify-center
@@ -32,19 +30,20 @@ const StoriesBar = () => {
                     <p className='text-sm font-medium text-slate-700
                     text-center'>Create Story</p>
                 </div>
+
             </div>
             {/* story cards */}
             {
                 stories.map((story, index)=> (
-                    <div onClick={()=> setViewStory(story)}key={index} className={`relative rounded-lg shadow
-                    min-w-30 max-w-30 max-h-40 cursor-pointer hover:shadow-lg
+                    <div onClick={()=> setViewStory(story)} key={story._id || index} style={story.media_type === 'text' && (story.background || story.background_color) ? { backgroundColor: story.background || story.background_color } : undefined} className={`relative rounded-lg shadow
+                    min-w-30 max-w-30 h-40 aspect-[3/4] overflow-hidden cursor-pointer hover:shadow-lg
                     transition-all duration-200 bg-gradient-to-b from-indigo-500
                     to-purple-600 hover:from-indigo-700 hover:to-purple-800
-                    active:scale-95` }>
+                    active:scale-95`}>
                         <img src={story.user.profile_picture} alt=""
                         className='absolute size-8 top-3 left-3 z-10 rounded-full
-                        ring ring-gray-100 shadow'/>
-                        <p className='absolute top-18 left-3 text-white/60 text-sm
+                        ring ring-gray-100 shadow object-cover'/>
+                        <p className='absolute top-18 left-3 z-10 text-white/80 text-sm
                         truncate max-w-24'>{story.content}</p>
                         <p className='text-white absolute bottom-1 right-1 z-10
                         text-xs'>{moment(story.createdAt).fromNow()}</p>
@@ -78,4 +77,5 @@ const StoriesBar = () => {
     </div>
   )
 }
+
 export default StoriesBar

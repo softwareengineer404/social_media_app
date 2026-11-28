@@ -1,19 +1,33 @@
-import React from 'react'
-import { dummyUserData } from '../assets/downloadedAssets'
-import { MessageCircle, MapPin, Plus } from 'lucide-react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { dummyUserData } from '../assets/assets'
+import { MapPin, MessageCircle, Plus, UserPlus } from 'lucide-react'
+import toast from 'react-hot-toast'
 const UserCard = ({user}) => {
     const currentUser = dummyUserData
+    const navigate = useNavigate()
+    const [isFollowing, setIsFollowing] = useState(currentUser.following.includes(user._id))
     const handleFollow = async () => {
-
+      if (isFollowing) {
+        currentUser.following = currentUser.following.filter((id) => id !== user._id)
+        setIsFollowing(false)
+      } else {
+        currentUser.following = [...currentUser.following, user._id]
+        setIsFollowing(true)
+      }
     }
     const handleConnectionRequest = async () => {
-
+      if (currentUser.connections.includes(user._id)) {
+        navigate(`/messages/${user._id}`)
+        return
+      }
+      toast.success('Connection request sent')
     }
   return (
-    <div key={user._id}className='p-4 pt-6 flex flex-col justify-between w-72 shadow border
+    <div className='p-4 pt-6 flex flex-col justify-between w-72 bg-white shadow border
     border-gray-200 rounded-md'>
         <div className='text-center'>
-            <img src={user.profile_picture} alt="" className='rounded-full w-16
+            <img src={user.profile_picture} alt="" className='rounded-full w-16 h-16 object-cover
             shadow-md mx-auto'/>
             <p className='mt-4 font-semibold'>{user.full_name}</p>
             {user.username && <p className='text-gray-500 font-light'>@{user.username}</p>}
@@ -23,25 +37,24 @@ const UserCard = ({user}) => {
         text-gray-600'>
             <div className='flex items-center gap-1 border border-gray-300
             rounded-full px-3 py-1'>
-                <MapPin className='w-4 h-4'/> (user.location)
+                <MapPin className='w-4 h-4'/> {user.location}
+
             </div>
             <div className='flex items-center gap-1 border border-gray-300
             rounded-full px-3 py-1'>
                 <span>{user.followers.length}</span> Followers
+
             </div>
         </div>
-        
         <div className='flex mt-4 gap-2'>
-
             {/* Follow Button */}
-            <button onClick={handleFollow} disabled={currentUser?.following.includes
-            (user._id)} className='w-full py-2 rounded-md flex justify-center
-            items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600
-            hover:from-indigo-600 hover:to-purple-700 active:scale-95 transition
-            text-white cursor-pointer'>
-                <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
-                (user._id) ? 'Following' : 'Follow'}
-
+            <button onClick={handleFollow} className={`w-full py-2 rounded-md flex justify-center
+            items-center gap-2 active:scale-95 transition cursor-pointer ${
+              isFollowing
+                ? 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300'
+                : 'bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white'
+            }`}>
+                <UserPlus className='w-4 h-4'/> {isFollowing ? 'Following' : 'Follow'}
             </button>
             {/* Connections request button / message button */}
             <button onClick={handleConnectionRequest} className='flex items-center
@@ -55,7 +68,6 @@ const UserCard = ({user}) => {
                     <Plus className='w-5 h-5 group-hover:scale-105 transition'/>
                 }
             </button>
-
         </div>
     </div>
   )
