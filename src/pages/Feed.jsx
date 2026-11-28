@@ -6,7 +6,6 @@ import PostCard from '../components/PostCard'
 import RecentMessages from '../components/RecentMessages'
 import { assets } from '../assets/assets'
 import { useAppData } from '../context/useAppData'
-
 const Feed = () => {
   const { currentUser, posts, bookmarks, profiles } = useAppData()
   const [filter, setFilter] = useState('For you')
