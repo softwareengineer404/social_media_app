@@ -1,68 +1,46 @@
-import React from 'react'
-import { Verified, PenBox, MapPin, Calendar } from 'lucide-react'
-const UserProfileInfo = ({user, posts, profileId,setShowEdit}) => {
-  return (
-    <div className='relative py-4 px-6 md:8 bg-white'>
-        <div className='flex flex-col md:flex-row items-start gap-6'>
-            <div className='w-32 h-32 border-4 border-white shadow-lg absolute -top-16
-            rounded-full'>
-                <img src={user.profile_picture} alt="" className='absolute rounded-full
-                z-2'/>
-            </div>
-            <div className='w-full pt-16 md:pt-0 md:pl-36'>
-                <div className='flex flex-col md:flex-row items-start justify-between'>
-                    <div>
-                        <div className='flex items-center gap-3'>
-                            <h1 className='text-2xl font-bold text-gray-900'>{user.full_name}</h1>
-                            <Verified className='w-6 h-6 text-blue-500'/>
-                        </div>
-                        <p className='text-gray-600'>{user.username ? `@${user.username}
-                        ` : 'Add a username'}</p>
-                    </div>
-                    {/* if user is not on others profile that means he is opening
-                    profile so we will give edit button */}
-                    {!profileId &&
-                        <button onClick={()=> setShowEdit(true)} className='flex
-                        items-center gap-2 border border-gray-300 hover:bg-gray-50 px-4
-                        py-2 rounded-lg font-medium transition-colors mt-4 md:mt-0
-                        cursor-pointer'>
-                            <PenBox className='w-4 h-4'/>
-                            Edit
-                        </button>}
-                </div>
-                <p className='text-gray-700 text-sm max-w-md mt-4'>{user.bio}</p>
-                <div>
-                    <span className='flex items-center gap-1.5'>
-                        <MapPin className='w-4 h-4'/>
-                        {user.location ? user.location : 'Add location'}
-                    </span>
-                    <span className='flex items-center gap-1.5'>
-                        <Calendar className='w-4 h-4'/>
-                        Joined <span className='font-medium'>{moment(user.createdAt).
-                        fromNow()}</span>
-                    </span>
-                </div>
-                <div className='flex items-center gap-6 mt-6 border-t border-gray-200
-                pt-4'>
-                    <div>
-                        <span className='sm:text-xl font-bold text-gray-900'>{posts.length}</span>
-                        <span className='text-xs sm:text-sm text-gray-500 ml-1.
-                        5'>Posts</span>
-                    </div>
-                     <div>
-                        <span className='sm:text-xl font-bold text-gray-900'>{user.followers.length}</span>
-                        <span className='text-xs sm:text-sm text-gray-500 ml-1.
-                        5'>Followers</span>
-                    </div>
-                     <div>
-                        <span className='sm:text-xl font-bold text-gray-900'>{user.following.length}</span>
-                        <span className='text-xs sm:text-sm text-gray-500 ml-1.
-                        5'>Following</span>
-                    </div>
-                </div>
-            </div>
+import { Link } from 'react-router-dom'
+import { BadgeCheck, CalendarDays, MapPin, MessageCircle, PenLine, UserPlus } from 'lucide-react'
+import moment from 'moment'
+
+const UserProfileInfo = ({ user, posts, isOwnProfile, isFollowing, isConnected, onEdit, onFollow }) => (
+  <div className='relative bg-white px-5 pb-6 pt-5 sm:px-8'>
+    <div className='flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between'>
+      <div className='flex min-w-0 items-end gap-4'>
+        <img src={user.profile_picture} alt='' className='-mt-14 size-24 shrink-0 rounded-3xl border-4 border-white bg-white object-cover shadow-md sm:-mt-16 sm:size-32' />
+        <div className='min-w-0 pb-1'>
+          <h1 className='flex flex-wrap items-center gap-2 text-2xl font-bold text-slate-900'>
+            {user.full_name}
+            {user.is_verified && <BadgeCheck size={19} className='text-blue-500' />}
+          </h1>
+          <p className='mt-0.5 text-sm text-slate-500'>@{user.username}</p>
         </div>
+      </div>
+      <div className='flex gap-2 sm:pb-1'>
+        {isOwnProfile ? (
+          <button type='button' onClick={onEdit} className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50'>
+            <PenLine size={16} /> Edit profile
+          </button>
+        ) : (
+          <>
+            <button type='button' onClick={onFollow} className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${isFollowing ? 'border border-slate-200 text-slate-700 hover:bg-slate-50' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}>
+              <UserPlus size={16} /> {isFollowing ? 'Following' : 'Follow'}
+            </button>
+            {isConnected && <Link to={`/messages/${user._id}`} className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50'><MessageCircle size={16} /> Message</Link>}
+          </>
+        )}
+      </div>
     </div>
-  )
-}
+    {user.bio && <p className='mt-5 max-w-2xl whitespace-pre-wrap text-sm leading-6 text-slate-600'>{user.bio}</p>}
+    <div className='mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500'>
+      {user.location && <span className='inline-flex items-center gap-1.5'><MapPin size={14} />{user.location}</span>}
+      <span className='inline-flex items-center gap-1.5'><CalendarDays size={14} />Joined {moment(user.createdAt).format('MMMM YYYY')}</span>
+    </div>
+    <div className='mt-6 flex gap-6 border-t border-slate-100 pt-4'>
+      <p className='text-sm text-slate-500'><span className='font-bold text-slate-900'>{posts.length}</span> posts</p>
+      <p className='text-sm text-slate-500'><span className='font-bold text-slate-900'>{user.followers.length}</span> followers</p>
+      <p className='text-sm text-slate-500'><span className='font-bold text-slate-900'>{user.following.length}</span> following</p>
+    </div>
+  </div>
+)
+
 export default UserProfileInfo

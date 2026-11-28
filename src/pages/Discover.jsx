@@ -1,54 +1,52 @@
-import React, { useState } from 'react'
-import { dummyConnectionsData } from '../assets/assets'
-import { Search } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { Search, Sparkles, Users } from 'lucide-react'
 import UserCard from '../components/UserCard'
-import Loading from '../components/Loading'
+import { useAppData } from '../context/useAppData'
+
 const Discover = () => {
-  const [input, setInput] = useState('')
-  const [users, setUsers] = useState(dummyConnectionsData)
-  const [loading, setLoading] = useState(false)
-  const handleSearch = async (e) => {
-    if(e.key === 'Enter'){
-      setUsers([])
-      setLoading(true)
-      setTimeout(()=>{
-        setUsers(dummyConnectionsData)
-        setLoading(false)
-      }, 1000)
-    }
-  }
+  const { currentUser, profiles } = useAppData()
+  const [query, setQuery] = useState('')
+  const [showFollowing, setShowFollowing] = useState(false)
+  const users = useMemo(() => profiles.filter((user) => {
+    if (user._id === currentUser._id) return false
+    if (showFollowing && !currentUser.following.includes(user._id)) return false
+    const searchable = `${user.full_name} ${user.username} ${user.bio} ${user.location}`.toLowerCase()
+    return searchable.includes(query.trim().toLowerCase())
+  }), [currentUser._id, currentUser.following, profiles, query, showFollowing])
+
   return (
-    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-white'>
-      <div className='max-w-6xl mx-auto p-6'>
-        {/* Title */}
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold text-slate-900 mb-2'>Discover People</h1>
-        <p className='text-slate-600'>Connect with amazing people and grow your network</p>
+    <div className='mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-10'>
+      <div className='mb-7'>
+        <p className='text-sm font-semibold text-indigo-600'>Find your people</p>
+        <h1 className='mt-1 text-3xl font-bold tracking-tight text-slate-900'>Discover</h1>
+        <p className='mt-2 text-slate-500'>Meet the people and perspectives that make this community.</p>
       </div>
-      {/* Search */}
-      <div className='mb-8 shadow-md rounded-md border border-slate-200/60 bg-white/
-      80'>
-        <div className='p-6'>
-          <div className='relative'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2
-            text-slate-400 w-5 h-5' />
-            <input type="text" placeholder='Search people by name, username, bio,
-            or location...' className='pl-10 sm:pl-12 py-2 w-full border
-            border-gray-300 rounded-md max-sm:text-sm' onChange={(e)=>setInput(e.
-            target.value)} value={input} onKeyUp={handleSearch}/>
-          </div>
+      <div className='mb-6 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center'>
+        <label className='relative min-w-0 flex-1'>
+          <Search size={18} className='absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400' />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder='Search people, interests, or places...' className='w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-indigo-300 focus:bg-white focus:ring-2 focus:ring-indigo-100' aria-label='Search community' />
+        </label>
+        <button type='button' onClick={() => setShowFollowing((following) => !following)} aria-pressed={showFollowing} className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition ${showFollowing ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}>
+          <Users size={17} /> {showFollowing ? 'Following' : 'Everyone'}
+        </button>
+      </div>
+      <div className='mb-4 flex items-center justify-between'>
+        <h2 className='font-semibold text-slate-800'>{showFollowing ? 'People you follow' : 'Suggested for you'}</h2>
+        <span className='text-sm text-slate-400'>{users.length} people</span>
+      </div>
+      {users.length > 0 ? (
+        <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
+          {users.map((user) => <UserCard key={user._id} user={user} />)}
         </div>
-      </div>
-      <div className='flex flex-wrap gap-6'>
-        {users.map((user)=>(
-          <UserCard user={user} key={user._id}/>
-        ))}
-      </div>
-      {
-        loading && (<Loading height='60vh'/>)
-      }
-      </div>
+      ) : (
+        <div className='rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center'>
+          <div className='mx-auto grid size-12 place-items-center rounded-2xl bg-indigo-50 text-indigo-600'><Sparkles size={22} /></div>
+          <h2 className='mt-4 font-semibold text-slate-900'>No people found</h2>
+          <p className='mt-1 text-sm text-slate-500'>{showFollowing ? 'Follow someone to see them in this list.' : 'Try a different name, username, or location.'}</p>
+        </div>
+      )}
     </div>
   )
 }
+
 export default Discover

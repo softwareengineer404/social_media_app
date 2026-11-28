@@ -1,63 +1,43 @@
-import React from 'react'
-import { dummyUserData } from '../assets/assets'
-import { MessageCircle, MapPin, Plus } from 'lucide-react'
-const UserCard = ({user}) => {
-    const currentUser = dummyUserData
-    const handleFollow = async () => {
+import { useNavigate } from 'react-router-dom'
+import { Check, MapPin, MessageCircle, Plus, UserPlus } from 'lucide-react'
+import { useAppData } from '../context/useAppData'
 
-    }
-    const handleConnectionRequest = async () => {
+const UserCard = ({ user }) => {
+  const navigate = useNavigate()
+  const { currentUser, connectionRequests, requestConnection, toggleFollow } = useAppData()
+  const isFollowing = currentUser.following.includes(user._id)
+  const isConnected = currentUser.connections.includes(user._id)
+  const requestSent = connectionRequests.some((request) =>
+    request.fromUserId === currentUser._id
+    && request.toUserId === user._id
+    && request.status === 'pending'
+  )
 
-    }
   return (
-    <div key={user._id}className='p-4 pt-6 flex flex-col justify-between w-72 shadow border
-    border-gray-200 rounded-md'>
-        <div className='text-center'>
-            <img src={user.profile_picture} alt="" className='rounded-full w-16
-            shadow-md mx-auto'/>
-            <p className='mt-4 font-semibold'>{user.full_name}</p>
-            {user.username && <p className='text-gray-500 font-light'>@{user.username}</p>}
-            {user.bio && <p className='text-gray-600 mt-2 text-center text-sm px-4'>{user.bio}</p>}
-        </div>
-        <div className='flex items-center justify-center gap-2 mt-4 text-xs
-        text-gray-600'>
-            <div className='flex items-center gap-1 border border-gray-300
-            rounded-full px-3 py-1'>
-                <MapPin className='w-4 h-4'/> (user.location)
-            </div>
-            <div className='flex items-center gap-1 border border-gray-300
-            rounded-full px-3 py-1'>
-                <span>{user.followers.length}</span> Followers
-            </div>
-        </div>
-        
-        <div className='flex mt-4 gap-2'>
-
-            {/* Follow Button */}
-            <button onClick={handleFollow} disabled={currentUser?.following.includes
-            (user._id)} className='w-full py-2 rounded-md flex justify-center
-            items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600
-            hover:from-indigo-600 hover:to-purple-700 active:scale-95 transition
-            text-white cursor-pointer'>
-                <UserPlus className='w-4 h-4'/> {currentUser?.following.includes
-                (user._id) ? 'Following' : 'Follow'}
-
-            </button>
-            {/* Connections request button / message button */}
-            <button onClick={handleConnectionRequest} className='flex items-center
-            justify-center w-16 border text-slate-500 group rounded-md
-            cursor-pointer active:scale-95 transition'>
-                {
-                    currentUser?.connections.includes(user._id) ?
-                    <MessageCircle className='w-5 h-5 group-hover:scale-105
-                    transition'/>
-                    :
-                    <Plus className='w-5 h-5 group-hover:scale-105 transition'/>
-                }
-            </button>
-
-        </div>
-    </div>
+    <article className='flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md'>
+      <button type='button' onClick={() => navigate(`/profile/${user._id}`)} className='flex flex-col items-center text-center'>
+        <img src={user.profile_picture} alt='' className='size-20 rounded-full object-cover ring-4 ring-indigo-50' />
+        <span className='mt-4 font-semibold text-slate-900'>{user.full_name}</span>
+        <span className='mt-0.5 text-sm text-slate-500'>@{user.username}</span>
+      </button>
+      <p className='mt-3 min-h-10 text-center text-sm leading-5 text-slate-600'>{user.bio || 'A new member of the community.'}</p>
+      {user.location && (
+        <p className='mt-3 flex items-center justify-center gap-1 text-xs text-slate-500'>
+          <MapPin size={14} /> {user.location}
+        </p>
+      )}
+      <p className='mt-2 text-center text-xs text-slate-400'>{user.followers.length} followers</p>
+      <div className='mt-auto flex gap-2 pt-5'>
+        <button type='button' onClick={() => toggleFollow(user._id)} className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${isFollowing ? 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50' : 'bg-indigo-600 text-white hover:bg-indigo-700'}`}>
+          {isFollowing ? <Check size={16} /> : <UserPlus size={16} />}
+          {isFollowing ? 'Following' : 'Follow'}
+        </button>
+        <button type='button' onClick={() => isConnected ? navigate(`/messages/${user._id}`) : requestConnection(user._id)} className='grid size-10 shrink-0 place-items-center rounded-xl border border-slate-200 text-slate-600 transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700' aria-label={isConnected ? `Message ${user.full_name}` : requestSent ? 'Cancel connection request' : `Connect with ${user.full_name}`} title={isConnected ? 'Open conversation' : requestSent ? 'Cancel request' : 'Send connection request'}>
+          {isConnected ? <MessageCircle size={18} /> : requestSent ? <Check size={18} /> : <Plus size={19} />}
+        </button>
+      </div>
+    </article>
   )
 }
+
 export default UserCard

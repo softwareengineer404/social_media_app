@@ -1,43 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import { dummyRecentMessagesData } from '../assets/assets'
 import { Link } from 'react-router-dom'
-const RecentMessages = () => {
-    const [messages, setMessages] = useState([])
-    const fetchRecentMessages = async () => {
-        setMessages(dummyRecentMessagesData)
-    }
-    useEffect(()=>{
-        fetchRecentMessages()
+import { MessageCircle } from 'lucide-react'
+import moment from 'moment'
+import { useAppData } from '../context/useAppData'
 
-    },[])
+const RecentMessages = () => {
+  const { currentUser, messages, profiles } = useAppData()
+  const conversations = [...new Set(messages.flatMap((message) => [
+    message.from_user_id,
+    message.to_user_id,
+  ]).filter((userId) => userId !== currentUser._id))]
+    .map((userId) => {
+      const user = profiles.find((profile) => profile._id === userId)
+      const latest = messages
+        .filter((message) => message.from_user_id === userId || message.to_user_id === userId)
+        .sort((first, second) => new Date(second.createdAt) - new Date(first.createdAt))[0]
+      return user ? { user, latest } : null
+    })
+    .filter(Boolean)
+    .slice(0, 4)
+
   return (
-    <div className='bg-white max-w-xs mt-4 p-4 min-h-20 rounded-md shadow text-xs
-    text-slate-800'>
-        <h3 className='font-semibold text-slate-800 mb-4'>Recent Messages</h3>
-        <div className='flex flex-col max-h-56 overflow-y-scroll no-scrollbar'>
-            {
-                messages.map((message, index)=>(
-                    <Link to={`/messages/${message.from_user_id._id}`} key={index} className='flex items-start gap-2 py-2
-                    hover:bg-slate-100'>
-                        <img src={message.from_user_id.profile_picture} alt=""
-                        className='w-8 h-8 rounded-full'/>
-                        <div className='w-full'>
-                            <div className='flex justify-between'>
-                                <p className='font-medium'>{message.from_user_id.full_name}</p>
-                                <p className='text-[10px] text-slate-400'>{moment(message.createdAt).fromNow()}</p>
-                            </div>
-                            <div className='flex justify-between'>
-                                <p className='text-gray-500'>{message.text ? message.text : 'Media'}</p>
-                                {!message.seen && <p className='bg-indigo-500
-                                text-white w-4 h-4 flex items-center justify-center
-                                rounded-full text-[10px]'>1</p>}
-                            </div>
-                        </div>
-                    </Link>
-                ))
-            }
+    <section className='rounded-2xl border border-slate-200 bg-white p-4 shadow-sm'>
+      <div className='mb-3 flex items-center justify-between'>
+        <h2 className='font-semibold text-slate-900'>Recent messages</h2>
+        <Link to='/messages' className='text-xs font-semibold text-indigo-600 hover:text-indigo-700'>See all</Link>
+      </div>
+      {conversations.length > 0 ? (
+        <div className='divide-y divide-slate-100'>
+          {conversations.map(({ user, latest }) => (
+            <Link key={user._id} to={`/messages/${user._id}`} className='flex items-center gap-3 py-3 first:pt-1 last:pb-0 hover:opacity-80'>
+              <img src={user.profile_picture} alt='' className='size-9 rounded-full object-cover' />
+              <span className='min-w-0 flex-1'>
+                <span className='block truncate text-sm font-medium text-slate-800'>{user.full_name}</span>
+                <span className='block truncate text-xs text-slate-500'>{latest.text || 'Photo'}</span>
+              </span>
+              <span className='text-[10px] text-slate-400'>{moment(latest.createdAt).fromNow()}</span>
+            </Link>
+          ))}
         </div>
-    </div>
+      ) : (
+        <div className='rounded-xl bg-slate-50 px-4 py-5 text-center'>
+          <MessageCircle size={20} className='mx-auto text-slate-400' />
+          <p className='mt-2 text-sm font-medium text-slate-700'>No conversations yet</p>
+          <Link to='/messages' className='mt-1 inline-block text-xs font-semibold text-indigo-600 hover:text-indigo-700'>Start a conversation</Link>
+        </div>
+      )}
+    </section>
   )
 }
+
 export default RecentMessages

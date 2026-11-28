@@ -1,121 +1,106 @@
-import React from 'react'
-import {Users, UserPlus, UserCheck, UserRoundPen, MessageSquare} from 'lucide-react'
-import { useNavigate } from 'react-router-dom';
-import {
-  dummyConnectionsData as connections,
-  dummyFollowersData as followers,
-  dummyFollowingData as following,
-  dummyPendingConnectionsData as pendingConnections
-} from '../assets/assets'
+import { createElement, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Check, MessageCircle, UserCheck, UserPlus, Users, X } from 'lucide-react'
+import moment from 'moment'
+import { useAppData } from '../context/useAppData'
+
 const Connections = () => {
-  const [currentTab, setCurrentTab] = useState('Followers')
-  const navigate = useNavigate()
-  const dataArray = [
-    {label: 'Follwers', value: followers, icon: Users },
-    {label: 'Follwing', value: following, icon: UserCheck },
-    {label: 'Pending', value: pendingConnections, icon: UserRoundPen },
-    {label: 'Connections', value: connections, icon: UserPlus },
+  const { currentUser, profiles, connectionRequests, respondToConnection, requestConnection, toggleFollow, removeConnection } = useAppData()
+  const [activeTab, setActiveTab] = useState('Followers')
+  const data = useMemo(() => {
+    const incoming = connectionRequests.filter((request) => request.toUserId === currentUser._id && request.status === 'pending')
+    const outgoing = connectionRequests.filter((request) => request.fromUserId === currentUser._id && request.status === 'pending')
+    return {
+      Followers: profiles.filter((profile) => profile.followers.includes(currentUser._id)),
+      Following: profiles.filter((profile) => currentUser.following.includes(profile._id)),
+      Requests: [...incoming.map((request) => ({ request, user: profiles.find((profile) => profile._id === request.fromUserId) })), ...outgoing.map((request) => ({ request, user: profiles.find((profile) => profile._id === request.toUserId) }))].filter((item) => item.user),
+      Connections: profiles.filter((profile) => currentUser.connections.includes(profile._id)),
+    }
+  }, [connectionRequests, currentUser, profiles])
+  const tabs = [
+    { name: 'Followers', icon: Users },
+    { name: 'Following', icon: UserCheck },
+    { name: 'Requests', icon: UserPlus },
+    { name: 'Connections', icon: Users },
   ]
+
   return (
-    <div className='min-h-screen bg-slate-50'>
-      <div className='max-w-6xl mx-auto p-6'>
-      {/* Title */}
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold text-slate-900 mb-2'>Connections</h1>
-        <p className='text-slate-600'>Manage your network and discover new connections</p>
+    <div className='mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-10'>
+      <div className='mb-7'>
+        <p className='text-sm font-semibold text-indigo-600'>Your network</p>
+        <h1 className='mt-1 text-3xl font-bold tracking-tight text-slate-900'>Connections</h1>
+        <p className='mt-2 text-slate-500'>Keep up with the people who make your community.</p>
       </div>
-      {/* countes */}
-      <div className='mb-8 flex flex-wrap gap-6'>
-        {dataArray.map((item, index)=>(
-          <div key={index} className='flex flex-col items-center justify-center
-          gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
-            <b>{item.value.length}</b>
-            <p className='text-slate-600'>{item.label}</p>
+      <div className='mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4'>
+        {tabs.map(({ name, icon }) => (
+          <div key={name} className='rounded-2xl border border-slate-200 bg-white p-4 shadow-sm'>
+            <div className='flex items-center justify-between'>
+              <span className='grid size-9 place-items-center rounded-xl bg-indigo-50 text-indigo-600'>{createElement(icon, { size: 18 })}</span>
+              <span className='text-2xl font-bold text-slate-900'>{data[name].length}</span>
+            </div>
+            <p className='mt-3 text-sm font-medium text-slate-500'>{name}</p>
           </div>
         ))}
       </div>
-      {/* Tabs */}
-      <div className='inline-flex flex flex-wrap items-center border border-gray-200
-      rounded-md p-1 bg-white shadow-sm'>
-        {
-          dataArray.map((tab) => (
-            <button onClick={()=> setCurrentTab(tab.label)}
-              key={tab.label}
-              className={`cursor-pointer flex items-center px-3 py-1 text-sm
-              rounded-md transition-colors ${
-                currentTab === tab.label
-                  ? 'bg-white font-medium text-black'
-                  : 'text-gray-500 hover:text-black'
-              }`}
-            >
-              <tab.icon className='w-4 h-4' />
-              <span className='ml-1'>
-                {tab.label}
-              </span>
-              {tab.count !== undefined && (
-                <span className='ml-2 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full'>
-                  {tab.count}
-                </span>
-              )}
-            </button>
-          ))
-        }
+      <div className='mb-5 flex max-w-full gap-1 overflow-x-auto rounded-xl bg-slate-200/70 p-1 sm:w-fit'>
+        {tabs.map(({ name }) => (
+          <button type='button' key={name} onClick={() => setActiveTab(name)} aria-pressed={activeTab === name} className={`shrink-0 rounded-lg px-4 py-2.5 text-sm font-semibold transition ${activeTab === name ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}>
+            {name}
+          </button>
+        ))}
       </div>
-      {/* Connections */}
-        <div>
-          {dataArray.find((item)=>item.label === currentTab).value.map((user)=>(
-            <div key={user._id} className='w-full max-w-88 flex gap-5 p-6 bg-white
-            shadow rounded-md'>
-              <img src={user.profile_picture} alt="" className="rounded-full w-12
-              h-12 shadow-md mx-auto"/>
-              <div className='flex-1'>
-                <p className="font-medium text-slate-700">{user.full_name}</p>
-                <p className="text-slate-500">@{user.user_name}</p>
-                <p className="text-sm text-gray-600">{user.bio.slice(0, 30)}...</p>
-                <div className='flex max-sm:flex-col gap-2 mt-4'>
-                  {
-                    <button onClick={()=> navigate(`/profile/${user._id}`)}
-                    className='w-full p-2 text-sm rounded bg-gradient-to-r
-                    from-indigo-500 to-purple-600 hover:from-indigo-600
-                    hover:to-purple-700 active:scale-95 transition text-white cursor-pointer'>
-                      View Profile
-                    </button>
-                  }
-                  {
-                    currentTab === 'Following' && (
-                      <button className='w-full p-2 text-sm rounded bg-slate-100
-                      hover:bg-slate-200 text-black active:scale-95 transition
-                      cursor-pointer'>
-                        Unfollow
-                      </button>
-                    )
-                  }
-                  {
-                    currentTab === 'pending' && (
-                      <button className='w-full p-2 text-sm rounded bg-slate-100
-                      hover:bg-slate-200 text-black active:scale-95 transition
-                      cursor-pointer'>
-                        Accept
-                      </button>
-                    )
-                  }
-                  {
-                    currentTab === 'Connections' && (
-                      <button onClick={()=> navigate(`/messages/${user._id}`)}className='w-full p-2 text-sm rounded bg-slate-100
-                      hover:bg-slate-200 text-slate-800 active:scale-95 transition
-                      cursor-pointer flex items-center justify-center gap-1'>
-                        <MessageSquare className='w-4 h-4'/>
-                        Message
-                      </button>
-                    )
-                  }
+      {data[activeTab].length > 0 ? (
+        <div className='space-y-3'>
+          {data[activeTab].map((item) => {
+            const isRequest = activeTab === 'Requests'
+            const user = isRequest ? item.user : item
+            const request = isRequest ? item.request : null
+            const isIncoming = request?.toUserId === currentUser._id
+            return (
+              <article key={isRequest ? request._id : user._id} className='flex flex-wrap items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5'>
+                <Link to={`/profile/${user._id}`}>
+                  <img src={user.profile_picture} alt='' className='size-14 rounded-full object-cover' />
+                </Link>
+                <div className='min-w-0 flex-1'>
+                  <Link to={`/profile/${user._id}`} className='font-semibold text-slate-900 hover:text-indigo-600'>{user.full_name}</Link>
+                  <p className='text-sm text-slate-500'>@{user.username}</p>
+                  <p className='mt-1 line-clamp-1 text-sm text-slate-500'>{user.bio}</p>
+                  {request && <p className='mt-1 text-xs text-slate-400'>{isIncoming ? 'Sent you a connection request' : `Request sent ${moment(request.createdAt).fromNow()}`}</p>}
                 </div>
-              </div>
-          </div>
-          ))}
+                <div className='flex w-full gap-2 sm:w-auto'>
+                  {activeTab === 'Following' && (
+                    <button type='button' onClick={() => toggleFollow(user._id)} className='flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:flex-none'>Unfollow</button>
+                  )}
+                  {activeTab === 'Requests' && isIncoming && (
+                    <>
+                      <button type='button' onClick={() => respondToConnection(request._id, false)} className='rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50' aria-label='Decline request'><X size={17} /></button>
+                      <button type='button' onClick={() => respondToConnection(request._id, true)} className='flex-1 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 sm:flex-none'><Check size={16} className='mr-1 inline' />Accept</button>
+                    </>
+                  )}
+                  {activeTab === 'Requests' && !isIncoming && (
+                    <button type='button' onClick={() => requestConnection(user._id)} className='flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50 sm:flex-none'>Cancel request</button>
+                  )}
+                  {activeTab === 'Connections' && (
+                    <>
+                      <Link to={`/messages/${user._id}`} className='flex flex-1 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 sm:flex-none'><MessageCircle size={16} />Message</Link>
+                      <button type='button' onClick={() => removeConnection(user._id)} className='rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-semibold text-slate-500 hover:bg-rose-50 hover:text-rose-600' aria-label={`Remove ${user.full_name} from connections`}><X size={17} /></button>
+                    </>
+                  )}
+                </div>
+              </article>
+            )
+          })}
         </div>
-      </div>
+      ) : (
+        <div className='rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center'>
+          <div className='mx-auto grid size-12 place-items-center rounded-2xl bg-indigo-50 text-indigo-600'><Users size={22} /></div>
+          <h2 className='mt-4 font-semibold text-slate-900'>No {activeTab.toLowerCase()} yet</h2>
+          <p className='mt-1 text-sm text-slate-500'>{activeTab === 'Requests' ? 'Connection requests will show up here.' : 'Find people to follow and grow your community.'}</p>
+          <Link to='/discover' className='mt-4 inline-flex rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700'>Discover people</Link>
+        </div>
+      )}
     </div>
   )
 }
-export default connections
+
+export default Connections

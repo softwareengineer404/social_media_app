@@ -1,81 +1,68 @@
-import React, { useEffect, useState}from 'react'
-import { dummyStoriesData } from '../assets/assets'
+import { useMemo, useState } from 'react'
 import { Plus } from 'lucide-react'
 import moment from 'moment'
 import StoryModal from './StoryModal'
-import StoryViewer  from './StoryViewer'
+import StoryViewer from './StoryViewer'
+import { useAppData } from '../context/useAppData'
 const StoriesBar = () => {
-    const [stories, setStories] = useState([])
+    const { stories, currentUser, deleteStory } = useAppData()
     const [showModal, setShowModal] = useState(false)
-    const [viewStory, setViewStory] = useState(null)
-    const fetchStories = async () => {
-        setStories(dummyStoriesData)
-    }
-    useEffect(()=>{
-        fetchStories()
-    },[])
+    const [viewingUserId, setViewingUserId] = useState(null)
+    const storyGroups = useMemo(() => {
+        const groups = new Map()
+        stories
+            .filter((story) => Date.now() - new Date(story.createdAt).getTime() < 24 * 60 * 60 * 1000)
+            .sort((first, second) => new Date(second.createdAt) - new Date(first.createdAt))
+            .forEach((story) => {
+                if (!groups.has(story.user._id)) groups.set(story.user._id, [])
+                groups.get(story.user._id).push(story)
+            })
+        return [...groups.entries()]
+    }, [stories])
+    const activeStories = storyGroups.find(([userId]) => userId === viewingUserId)?.[1] || []
   return (
-    <div className='w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scrollbar
-    overflow-x-auto px-4'>
-        <div onClick={()=>setShowModal(true)}className='flex gap-4 pb-5'>
-            {/* add story card */}
-            <div className='rounded-lg shadow-sm min-w-30 max-h-40 aspect-
-            [3/4] cursor-pointer hover:shadow-lg transition-all duration-200
-            border-2 border-dashed border-indigo-300 bg-gradient-to-b
-            from-indigo-50 to-white'>
-                <div className='h-full flex flex-col items-center justify-center
-                p-4'>
-                    <div className='size-10 bg-indigo-500 rounded-full flex
-                    items-center justify-center mb-3'>
-                        <Plus className='w-5 h-5 text-white'/>
-                    </div>
-                    <p className='text-sm font-medium text-slate-700
-                    text-center'>Create Story</p>
-                </div>
-            </div>
-            {/* story cards */}
-            {
-                stories.map((story, index)=> (
-                    <div onClick={()=> setViewStory(story)}key={index} className={`relative rounded-lg shadow
-                    min-w-30 max-w-30 max-h-40 cursor-pointer hover:shadow-lg
-                    transition-all duration-200 bg-gradient-to-b from-indigo-500
-                    to-purple-600 hover:from-indigo-700 hover:to-purple-800
-                    active:scale-95` }>
-                        <img src={story.user.profile_picture} alt=""
-                        className='absolute size-8 top-3 left-3 z-10 rounded-full
-                        ring ring-gray-100 shadow'/>
-                        <p className='absolute top-18 left-3 text-white/60 text-sm
-                        truncate max-w-24'>{story.content}</p>
-                        <p className='text-white absolute bottom-1 right-1 z-10
-                        text-xs'>{moment(story.createdAt).fromNow()}</p>
-                        {
-                            story.media_type !== 'text' && (
-                                <div className='absolute inset-0 z-1 rounded-lg
-                                bg-black overflow-hidden'>
-                                      {
-                                        story.media_type === "image" ?
-                                        <img src={story.media_url} alt="" className='h-full
-                                        w-full object-cover hover:scale-110 transition
-                                        duration-500 opacity-70 hover:opacity-80'/>
-                                        :
-                                        <video src={story.media_url} className='h-full w-full
-                                        object-cover hover:scale-110 transition duration-500
-                                        opacity-70 hover:opacity-80'/>
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-                ))
-            }
+    <section className='mb-7 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5'>
+      <div className='mb-4 flex items-center justify-between'>
+        <div>
+          <h2 className='font-semibold text-slate-900'>Stories</h2>
+          <p className='text-xs text-slate-500'>Moments disappear after 24 hours</p>
         </div>
-        {/*add story modal */}
-        {showModal && <StoryModal setShowModal={setShowModal} fetchStories=
-        {fetchStories}/>}
-        {/* View Story Modal */}
-        {viewStory && <StoryViewer viewStory={viewStory} setViewStory=
-        {setViewStory}/>}
-    </div>
+        <button type='button' onClick={() => setShowModal(true)} className='inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-50'>
+          <Plus size={17} /> Add story
+        </button>
+      </div>
+      <div className='no-scrollbar flex gap-4 overflow-x-auto pb-1'>
+        <button type='button' onClick={() => setShowModal(true)} className='flex w-20 shrink-0 flex-col items-center gap-2 text-center'>
+          <span className='grid size-16 place-items-center rounded-full border-2 border-dashed border-indigo-300 bg-indigo-50 text-indigo-600'>
+            <Plus size={24} />
+          </span>
+          <span className='text-xs font-medium text-slate-700'>Your story</span>
+        </button>
+        {storyGroups.map(([userId, userStories]) => {
+          const user = userStories[0].user
+          const isOwnStory = userId === currentUser._id
+          return (
+            <button type='button' key={userId} onClick={() => setViewingUserId(userId)} className='flex w-20 shrink-0 flex-col items-center gap-2 text-center'>
+              <span className='rounded-full bg-gradient-to-tr from-fuchsia-500 via-rose-500 to-amber-400 p-[2px]'>
+                <img src={user.profile_picture} alt='' className='size-16 rounded-full border-2 border-white object-cover' />
+              </span>
+              <span className='w-full truncate text-xs font-medium text-slate-700'>{isOwnStory ? 'Your story' : user.full_name}</span>
+              <span className='sr-only'>{userStories.length} stories, latest {moment(userStories[0].createdAt).fromNow()}</span>
+            </button>
+          )
+        })}
+      </div>
+      {showModal && <StoryModal setShowModal={setShowModal} />}
+      {activeStories.length > 0 && (
+        <StoryViewer
+          key={viewingUserId}
+          stories={activeStories}
+          currentUserId={currentUser._id}
+          onClose={() => setViewingUserId(null)}
+          onDelete={deleteStory}
+        />
+      )}
+    </section>
   )
 }
 export default StoriesBar

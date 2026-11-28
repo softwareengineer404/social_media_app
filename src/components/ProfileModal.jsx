@@ -1,117 +1,107 @@
-import React, { useState } from 'react'
-import { dummyUserData } from '../assets/assets'
-import { Pencil } from 'lucide-react';
-const ProfileModal = ({setShowEdit}) => {
-    const user = dummyUserData;
-    const [editForm, setEditForm] = useState({
-        username: user.username,
-        bio: user.bio,
-        location: user.location,
-        profile_picture: null,
-        cover_photo: null,
-        full_name: user.full_name,
-    })
-    const handleSaveProfile = async (e) => {
-        e.preventDefault();
-    }
-  return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 z-110 h-screen
-    overflow-y-scroll bg-black/50'>
-        <div className='max-w-2xl sm:py-6 mx-auto'>
-            <div className='bg-white rounded-lg shadow p-6'>
-                <h1 className='text-2xl font-bold text-gray-900 mb-6'>Edit Profile</h1>
-                <form className='space-y-4' onSubmit={handleSaveProfile}>
-                    {/* Profile Picture */}
-                    <div className='flex flex-col items-start gap-3'>
-                        <label htmlFor="profile_picture" className='block text-sm
-                        font-medium text-gray-700 mb-1'>
-                            Profile Picture
-                            <input hidden type="file" accept="image/*" id="profile_picture"
-                            className="w-full p-3 border border-gray-200 rounded-lg"
-                            onChange={(e)=>setEditForm({...editForm, profile_picture: e.target.files[0]})}/>
-                            <div>
-                                <img src={editForm.profile_picture ? URL.createObjectURL
-                                (editForm.profile_picture) : user.profile_picture}
-                                alt="" className='w-24 h-24 rounded-full object-cover mt-2'/>
-                                <div className='absolute hidden group-hover/
-                                profile:flex top-0 left-0 right-0 bottom-0 bg-black/20
-                                rounded-full items-center justify-center'>
-                                    <Pencil className="w-5 h-5 text-white"/>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                {/* Cover Photo */} 
-                <div className='flex flex-col items-start gap-3'>
-                    <label htmlFor="cover_photo" className="block text-sm font-medium
-                    text-gray-700 mb-1">
-                        Cover Photo
-                        <input hidden type="file" accept="image/*" id="cover_photo"
-                        className="w-full p-3 border border-gray-200 rounded-lg"
-                        onChange={(e)=>setEditForm({...editForm, cover_photo: e.target.files[0]})}/>
-                        <div className='group/cover relative'>
-                            <img src={editForm.cover_photo ? URL.createObjectURL
-                            (editForm.cover_photo) : user.cover_photo} alt=""
-                            className='w-80 h-40 rounded-lg bg-gradient-to-r
-                            from-indigo-200 via-purple-200 to-pink-200 object-cover
-                            mt-2'/>
-                            <div className='absolute hidden group-hover/cover:flex
-                            top-0 left-0 right-0 bottom-0 bg-black/20 rounded-lg
-                            items-center justify-center'>
-                                <Pencil className="w-5 h-5 text-white"/>
-                            </div>
-                            
-                        </div>
-                    </label>
-                </div> 
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Name
-                    </label>
-                        <input type="text" className='w-full p-3 border border-gray-200
-                        rounded-lg' placeholder='please enter your full name' onChange={(e)=> setEditForm({...editForm, full_name: e.target.value})} value={editForm.full_name}/>
-                     
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        User name
-                    </label>
-                        <input type="text" className='w-full p-3 border border-gray-200
-                        rounded-lg' placeholder='please enter your user name' onChange={(e)=> setEditForm({...editForm, username: e.target.value})} value={editForm.username}/>
-                
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Bio
-                    </label>
-                        <textarea rows={3} className='w-full p-3 border border-gray-200
-                        rounded-lg' placeholder='please enter your bio' onChange={(e)=> setEditForm({...editForm, bio: e.target.value})} value={editForm.bio}/>
-                        
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Location
-                    </label>
-                        <input type="text" className='w-full p-3 border border-gray-200
-                        rounded-lg' placeholder='please enter your location' onChange={(e)=> setEditForm({...editForm, location: e.target.value})} value={editForm.location}/>
-        
-        
-                </div>
-                <div className='flex justify-end space-x-3 pt-6'>
-                    <button onClick={()=> setShowEdit(false)} type='button'
-                    className='px-4 py-2 border border-gray-300 rounded-lg
-                    text-gray-700 hover:bg-gray-50 transition-colors 
-                    cursor-pointer'>cancel</button>
-                    <button type='submit' className='px-4 py-2 bg-gradient-to-r
-                    from-indigo-500 to-purple-600 text-white rounded-lg
-                    hover:from-indigo-600 hover:to-purple-700 transition
-                    cursor-pointer'>Save Changes</button>
-                </div>
-                </form>
-            </div>
-        </div>
+import { useState } from 'react'
+import { Camera, X } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { fileToLocalUrl } from '../data/media'
 
+const ProfileModal = ({ user, onClose, onSave }) => {
+  const [form, setForm] = useState({
+    full_name: user.full_name,
+    username: user.username,
+    bio: user.bio || '',
+    location: user.location || '',
+    profile_picture: user.profile_picture,
+    cover_photo: user.cover_photo,
+  })
+  const [saving, setSaving] = useState(false)
+
+  const updateMedia = async (event, field) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    try {
+      const mediaUrl = await fileToLocalUrl(file)
+      setForm((current) => ({ ...current, [field]: mediaUrl }))
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const submit = async (event) => {
+    event.preventDefault()
+    if (!form.full_name.trim() || !form.username.trim()) {
+      toast.error('Name and username are required.')
+      return
+    }
+    setSaving(true)
+    try {
+      await onSave({
+        ...form,
+        full_name: form.full_name.trim(),
+        username: form.username.trim().replace(/^@/, '').toLowerCase(),
+        bio: form.bio.trim(),
+        location: form.location.trim(),
+        updatedAt: new Date().toISOString(),
+      })
+      toast.success('Your profile has been updated.')
+      onClose()
+    } catch (error) {
+      console.error('Unable to update profile:', error)
+      toast.error('Your profile could not be saved.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <div className='fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-sm' role='presentation' onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
+      <section role='dialog' aria-modal='true' aria-labelledby='edit-profile-heading' className='my-auto w-full max-w-xl rounded-3xl bg-white shadow-2xl'>
+        <header className='flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-7'>
+          <div>
+            <p className='text-xs font-semibold uppercase tracking-[0.18em] text-indigo-600'>Your account</p>
+            <h2 id='edit-profile-heading' className='mt-1 text-xl font-bold text-slate-900'>Edit profile</h2>
+          </div>
+          <button type='button' onClick={onClose} className='rounded-full p-2 text-slate-500 hover:bg-slate-100' aria-label='Close profile editor'><X size={20} /></button>
+        </header>
+        <form onSubmit={submit} className='space-y-5 p-5 sm:p-7'>
+          <label className='group relative block cursor-pointer overflow-hidden rounded-2xl bg-slate-100'>
+            <img src={form.cover_photo} alt='Profile cover preview' className='h-36 w-full object-cover' />
+            <span className='absolute inset-0 grid place-items-center bg-slate-950/30 text-sm font-semibold text-white opacity-0 transition group-hover:opacity-100'><Camera size={18} className='mr-2 inline' />Change cover photo</span>
+            <input type='file' accept='image/*' className='sr-only' onChange={(event) => updateMedia(event, 'cover_photo')} />
+          </label>
+          <label className='flex cursor-pointer items-center gap-4'>
+            <span className='relative'>
+              <img src={form.profile_picture} alt='Profile photo preview' className='size-20 rounded-full border-4 border-white object-cover shadow-md' />
+              <span className='absolute bottom-0 right-0 grid size-7 place-items-center rounded-full bg-indigo-600 text-white'><Camera size={14} /></span>
+            </span>
+            <span>
+              <span className='block text-sm font-semibold text-slate-800'>Profile photo</span>
+              <span className='mt-1 block text-xs text-slate-500'>Choose an image from this device</span>
+            </span>
+            <input type='file' accept='image/*' className='sr-only' onChange={(event) => updateMedia(event, 'profile_picture')} />
+          </label>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <label className='text-sm font-semibold text-slate-700'>Full name
+              <input required maxLength={60} value={form.full_name} onChange={(event) => setForm((current) => ({ ...current, full_name: event.target.value }))} className='mt-1.5 w-full rounded-xl border border-slate-200 px-3.5 py-3 font-normal outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100' />
+            </label>
+            <label className='text-sm font-semibold text-slate-700'>Username
+              <input required maxLength={30} pattern='[A-Za-z0-9._-]+' value={form.username} onChange={(event) => setForm((current) => ({ ...current, username: event.target.value }))} className='mt-1.5 w-full rounded-xl border border-slate-200 px-3.5 py-3 font-normal outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100' />
+            </label>
+          </div>
+          <label className='block text-sm font-semibold text-slate-700'>About you
+            <textarea maxLength={180} rows={3} value={form.bio} onChange={(event) => setForm((current) => ({ ...current, bio: event.target.value }))} className='mt-1.5 w-full resize-y rounded-xl border border-slate-200 px-3.5 py-3 font-normal outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100' placeholder='What would you like people to know?' />
+            <span className='mt-1 block text-right text-xs font-normal text-slate-400'>{form.bio.length}/180</span>
+          </label>
+          <label className='block text-sm font-semibold text-slate-700'>Location
+            <input maxLength={80} value={form.location} onChange={(event) => setForm((current) => ({ ...current, location: event.target.value }))} className='mt-1.5 w-full rounded-xl border border-slate-200 px-3.5 py-3 font-normal outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100' placeholder='City, country' />
+          </label>
+          <footer className='flex justify-end gap-3 border-t border-slate-100 pt-5'>
+            <button type='button' onClick={onClose} className='rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50'>Cancel</button>
+            <button type='submit' disabled={saving} className='rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-60'>{saving ? 'Saving...' : 'Save changes'}</button>
+          </footer>
+        </form>
+      </section>
     </div>
   )
 }
+
 export default ProfileModal

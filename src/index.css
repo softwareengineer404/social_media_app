@@ -1,11 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-@import "tailwindcss/base";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-* {
-  font-family: "outfit", sans-serif;
+
+:root {
+  font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.no-scrollbar::-webkit-scrollbar{
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+video {
+  display: block;
+}
+
+.no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+::selection {
+  color: #312e81;
+  background: #e0e7ff;
+}
+
+@keyframes story-progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.animate-story-progress {
+  animation: story-progress 6s linear forwards;
 }
