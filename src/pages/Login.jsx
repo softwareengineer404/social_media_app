@@ -1,7 +1,6 @@
 import { ArrowUpRight, MessageCircle, ShieldCheck, Sparkles } from 'lucide-react'
 import { SignIn } from '@clerk/clerk-react'
 import { assets } from '../assets/assets'
-
 const Login = () => (
   <main className='relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 p-4 sm:p-8'>
     <div className='absolute -left-32 -top-32 size-96 rounded-full bg-indigo-600/25 blur-3xl' />
